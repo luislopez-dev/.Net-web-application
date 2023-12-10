@@ -1,0 +1,10 @@
+bin/
+obj/
+/packages/
+riderModule.iml
+/_ReSharper.Caches/
+appsettings.json 
+NetFramework/
+NetFrameworkUnitTests/
+test
+.idea/
