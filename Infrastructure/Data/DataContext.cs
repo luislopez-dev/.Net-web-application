@@ -1,6 +1,10 @@
-﻿namespace Infrastructure.Data;
+﻿using Microsoft.EntityFrameworkCore;
 
-public class DataContext
+namespace Infrastructure.Data;
+
+public class DataContext: DbContext
 {
-    
+    public DataContext(DbContextOptions options) : base(options)
+    {
+    }
 }
