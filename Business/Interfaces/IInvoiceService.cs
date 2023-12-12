@@ -1,4 +1,4 @@
-﻿namespace Core.Interfaces;
+﻿namespace Business.Interfaces;
 
 public interface IInvoiceService
 {

@@ -1,4 +1,4 @@
-﻿namespace Core.Models;
+﻿namespace Business.Models;
 
 public class Invoice
 {

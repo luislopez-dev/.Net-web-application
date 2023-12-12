@@ -1,4 +1,4 @@
-﻿namespace Core.Services;
+﻿namespace Business.Services;
 
 public class InvoiceService
 {
