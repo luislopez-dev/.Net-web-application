@@ -1,6 +1,8 @@
-﻿namespace PruebaTecnica.Controllers;
+﻿using Microsoft.AspNetCore.Mvc;
 
-public class BaseController
+namespace PruebaTecnica.Controllers;
+
+public class BaseController : Controller
 {
     
 }
