@@ -1,4 +1,4 @@
-﻿namespace PruebaTecnica.Controllers;
+﻿namespace Presentation.Controllers;
 
 public class InvoicesController : BaseController
 {
