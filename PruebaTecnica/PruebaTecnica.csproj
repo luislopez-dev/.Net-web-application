@@ -8,7 +8,6 @@
 
     <ItemGroup>
       <Folder Include="Pages\Invoices\" />
-      <Folder Include="Pages\Products\" />
     </ItemGroup>
 
 </Project>
