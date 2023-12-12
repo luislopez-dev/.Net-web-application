@@ -10,4 +10,12 @@
       <Folder Include="Helpers\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Pages\Products\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Products\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Products\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Products\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Products\Index.cshtml" />
+    </ItemGroup>
+
 </Project>

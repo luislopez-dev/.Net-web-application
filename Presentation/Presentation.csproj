@@ -6,4 +6,17 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
+    <ItemGroup>
+      <AdditionalFiles Include="Pages\Invoices\Create.cshtml" />
+      <AdditionalFiles Include="Pages\Invoices\Delete.cshtml" />
+      <AdditionalFiles Include="Pages\Invoices\Details.cshtml" />
+      <AdditionalFiles Include="Pages\Invoices\Edit.cshtml" />
+      <AdditionalFiles Include="Pages\Invoices\Index.cshtml" />
+      <AdditionalFiles Include="Pages\Products\Create.cshtml" />
+      <AdditionalFiles Include="Pages\Products\Delete.cshtml" />
+      <AdditionalFiles Include="Pages\Products\Details.cshtml" />
+      <AdditionalFiles Include="Pages\Products\Edit.cshtml" />
+      <AdditionalFiles Include="Pages\Products\Index.cshtml" />
+    </ItemGroup>
+
 </Project>
