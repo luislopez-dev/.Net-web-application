@@ -1,4 +1,4 @@
-﻿namespace PruebaTecnica.Models;
+﻿namespace Core.Models;
 
 public class Product
 {

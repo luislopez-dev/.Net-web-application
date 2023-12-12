@@ -1,4 +1,4 @@
-﻿namespace PruebaTecnica.Services;
+﻿namespace Core.Services;
 
 public class InvoiceService
 {
