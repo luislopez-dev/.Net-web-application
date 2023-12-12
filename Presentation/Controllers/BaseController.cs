@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace PruebaTecnica.Controllers;
+namespace Presentation.Controllers;
 
 public class BaseController : Controller
 {
