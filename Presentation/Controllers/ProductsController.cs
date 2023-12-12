@@ -8,4 +8,9 @@ public class ProductsController : BaseController
     {
         return View();
     }
+
+    public IActionResult Delete()
+    {
+        return View();
+    }
 }
