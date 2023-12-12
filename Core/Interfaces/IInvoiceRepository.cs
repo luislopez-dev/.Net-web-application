@@ -1,4 +1,4 @@
-﻿namespace PruebaTecnica.Interfaces;
+﻿namespace Core.Interfaces;
 
 public interface IInvoiceRepository
 {
