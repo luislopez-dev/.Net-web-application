@@ -1,6 +1,6 @@
 ﻿namespace PruebaTecnica.Controllers;
 
-public class InvoicesController
+public class InvoicesController : BaseController
 {
     
 }
