@@ -1,5 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+("{ProjectFAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PruebaTecnica", "PruebaTecnica\PruebaTecnica.csproj", "{4705B6D0-9384-4CD0-8DE9-608CED2AA29F}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation", "Presentation\Presentation.csproj", "{4CE8A109-83A4-41E5-9764-9D0836759F81}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{1D98CEA5-E9A2-4658-9942-EAA77B478B9A}"
