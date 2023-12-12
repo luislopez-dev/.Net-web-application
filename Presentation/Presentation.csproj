@@ -19,8 +19,4 @@
       <_ContentIncludedByDefault Remove="Pages\Invoices\Index.cshtml" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Pages\Products\" />
-    </ItemGroup>
-
 </Project>
