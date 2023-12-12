@@ -7,16 +7,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <AdditionalFiles Include="Pages\Invoices\Create.cshtml" />
-      <AdditionalFiles Include="Pages\Invoices\Delete.cshtml" />
-      <AdditionalFiles Include="Pages\Invoices\Details.cshtml" />
-      <AdditionalFiles Include="Pages\Invoices\Edit.cshtml" />
-      <AdditionalFiles Include="Pages\Invoices\Index.cshtml" />
-      <AdditionalFiles Include="Pages\Products\Create.cshtml" />
-      <AdditionalFiles Include="Pages\Products\Delete.cshtml" />
-      <AdditionalFiles Include="Pages\Products\Details.cshtml" />
-      <AdditionalFiles Include="Pages\Products\Edit.cshtml" />
-      <AdditionalFiles Include="Pages\Products\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Products\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Products\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Products\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Products\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Products\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Invoices\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Invoices\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Invoices\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Invoices\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Invoices\Index.cshtml" />
     </ItemGroup>
 
 </Project>
