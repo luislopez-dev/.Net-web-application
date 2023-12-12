@@ -13,4 +13,9 @@ public class InvoicesController : BaseController
     {
         return View();
     }
+    
+    public IActionResult Details(int? id)
+    {
+        return View();
+    }
 }
