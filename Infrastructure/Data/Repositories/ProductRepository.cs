@@ -1,4 +1,4 @@
-﻿namespace PruebaTecnica.Data.Repositories;
+﻿namespace Infrastructure.Data.Repositories;
 
 public class ProductRepository
 {
