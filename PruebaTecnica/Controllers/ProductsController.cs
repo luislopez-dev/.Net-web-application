@@ -1,6 +1,6 @@
 ﻿namespace PruebaTecnica.Controllers;
 
-public class ProductsController
+public class ProductsController : BaseController
 {
     
 }
