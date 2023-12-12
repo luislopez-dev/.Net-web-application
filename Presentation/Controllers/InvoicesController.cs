@@ -23,4 +23,9 @@ public class InvoicesController : BaseController
     {
         return View();
     }
+    
+    public IActionResult Create()
+    {
+        return View();
+    }
 }
