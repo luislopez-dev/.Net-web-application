@@ -19,4 +19,9 @@
       <_ContentIncludedByDefault Remove="Pages\Invoices\Index.cshtml" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Application\Application.csproj" />
+      <ProjectReference Include="..\Business\Business.csproj" />
+    </ItemGroup>
+
 </Project>
