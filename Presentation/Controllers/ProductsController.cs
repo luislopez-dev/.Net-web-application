@@ -9,9 +9,8 @@ public class ProductsController : BaseController
         return View();
     }
 
-    public IActionResult Delete(int? id)
+    public void Delete(int? id)
     {
-        return View();
     }
 
     public IActionResult Details(int? id)
