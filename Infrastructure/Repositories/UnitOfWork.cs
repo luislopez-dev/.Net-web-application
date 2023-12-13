@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Data.Repositories;
+﻿namespace Infrastructure.Repositories;
 
 public class UnitOfWork
 {
