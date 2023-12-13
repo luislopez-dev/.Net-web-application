@@ -5,4 +5,24 @@
     Layout = "_Layout";
 }
 
-<h2>title</h2>
+<div>
+    <form method="POST" action="">
+        <div class="mb-3">
+            <label for="InputName" class="form-label">Nombre</label>
+            <input name="name" value="name" type="text" class="form-control" id="InputName" aria-describedby="name">
+        </div>
+        <div class="mb-3">
+            <label for="InputPrice" class="form-label">Precio (Q)</label>
+            <input name="price" value="0" type="number" class="form-control" id="InputPrice">
+        </div>
+        <div class="mb-3">
+            <label for="InputStock" class="form-label">Stock</label>
+            <input name="stock" value="0" type="number" class="form-control" id="InputStock">
+        </div>
+        <div class="mb-3">
+            <label for="InputDescription" class="form-label">Descripción</label>
+            <textarea name="description" class="form-control" id="InputDescription" rows="3">Description</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Actualizar</button>
+    </form>
+</div>
