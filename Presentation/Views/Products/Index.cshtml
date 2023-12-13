@@ -4,5 +4,81 @@
     ViewBag.Title = "title";
     Layout = "_Layout";
 }
+        <nav class="navbar bg-body-tertiary">
+          <div class="container-fluid">
+              <form class="d-flex">
+                <input class="form-control me-2" placeholder="Buscar" label="Search" />
+                <button class="btn btn-outline-primary" type="submit">Buscar</button>
+            </form>
+          </div>
+        </nav>
 
-<h2>title</h2>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Stock</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Ver</th>
+                <th scope="col">Editar</th>
+                <th scope="col">Eliminar</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>#</td>
+                    <td>name</td>
+                    <td>price</td>
+                    <td>stock</td>
+                    <td>description</td>
+                    <td>
+                        <a href="">
+                            <button type="button" class="btn btn-success">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="">
+                            <button type="button" class="btn btn-warning">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                        </a>
+                    </td>
+                    <td>
+                        <button type="submit" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ModalDelete-x">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                        <!-- Modal Delete -->
+                        <div class="modal fade" id="ModalDelete-x" tabindex="-1" aria-labelledby="Modal-Delete" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar producto</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        name
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <form method="POST" action="x">
+                                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="alert alert-info" role="alert">
+            No se encontraron productos!
+        </div>
