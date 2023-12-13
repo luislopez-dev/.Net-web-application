@@ -1,6 +1,6 @@
 ﻿namespace Application.Services;
 
-public class ProductService
+public class ServiceManager
 {
     
 }
