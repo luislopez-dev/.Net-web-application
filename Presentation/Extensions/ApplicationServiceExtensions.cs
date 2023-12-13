@@ -1,6 +1,6 @@
 ﻿namespace Presentation.Extensions;
 
-public class ApplicationServiceExtensions
+public static class ApplicationServiceExtensions
 {
-    
+  
 }
