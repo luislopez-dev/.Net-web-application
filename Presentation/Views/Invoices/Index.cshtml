@@ -4,5 +4,43 @@
     ViewBag.Title = "title";
     Layout = "_Layout";
 }
-
-<h2>title</h2>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+<table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre del cliente</th>
+                <th scope="col">Dirección de envio</th>
+                <th scope="col">NIT</th>
+                <th scope="col">Método de pago</th>
+                <th scope="col">Impuestos</th>
+                <th scope="col">Descuento</th>
+                <th scope="col">Productos</th>
+                <th scope="col">Total</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>#1</td>
+                    <td>Nombre</td>
+                    <td>Dirección del cliente</td>
+                    <td>NIT</td>
+                    <td>Método de pago</td>
+                    <td>Impuestos</td>
+                    <td>Descuentos</td>
+                    <td>
+                        <select class="form-select" aria-label="Default select example">
+                            <option>nombre</option>
+                            <option>nombre</option>
+                            <option>nombre</option>
+                        </select>
+                    </td>
+                    <td>Total</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="alert alert-info" role="alert">
+            No se encontraron facturas!
+        </div>
