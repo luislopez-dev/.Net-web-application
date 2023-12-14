@@ -18,22 +18,7 @@ public class InvoiceRepository: IInvoiceRepository
         throw new NotImplementedException();
     }
 
-    public void DeleteInvoice(Invoice invoice)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void UpdateInvoice(Invoice invoice)
-    {
-        throw new NotImplementedException();
-    }
-
     public Task<List<Invoice>> GetInvoices()
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<Invoice> GetInvoice()
     {
         throw new NotImplementedException();
     }
