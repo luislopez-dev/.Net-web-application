@@ -1,6 +1,14 @@
-﻿namespace Infrastructure.Repositories;
+﻿using Business.Interfaces;
+using Infrastructure.Data;
 
-public class ProductRepository
+namespace Infrastructure.Repositories;
+
+public class ProductRepository: IProductRepository
 {
-    
+    private readonly DataContext _context;
+
+    public ProductRepository(DataContext context)
+    {
+        _context = context;
+    }
 }
