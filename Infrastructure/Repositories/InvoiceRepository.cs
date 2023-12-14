@@ -1,6 +1,14 @@
-﻿namespace Infrastructure.Repositories;
+﻿using Business.Interfaces;
+using Infrastructure.Data;
 
-public class InvoiceRepository
+namespace Infrastructure.Repositories;
+
+public class InvoiceRepository: IInvoiceRepository
 {
-    
+    private readonly DataContext _context;
+
+    public InvoiceRepository(DataContext context)
+    {
+        _context = context;
+    }
 }
