@@ -1,8 +1,17 @@
-﻿using Business.Interfaces;
+﻿using Application.Abstractions;
+using Business.Interfaces;
 
 namespace Application.Services;
 
-public class ServiceManager
+public sealed class ServiceManager: IServiceManager
+
 {
-    
+    public IInvoiceService InvoiceService { get; }
+    public IProductService ProductService { get; }
+
+    public ServiceManager(IInvoiceService invoiceService, IProductService productService)
+    {
+        InvoiceService = invoiceService;
+        ProductService = productService;
+    }
 }
