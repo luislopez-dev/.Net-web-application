@@ -8,6 +8,11 @@
 
     <ItemGroup>
       <Folder Include="Exceptions\" />
+      <Folder Include="Helpers\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FluentValidation" Version="11.8.1" />
     </ItemGroup>
 
 </Project>
