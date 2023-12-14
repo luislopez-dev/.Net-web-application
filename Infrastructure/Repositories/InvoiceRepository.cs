@@ -19,7 +19,7 @@ public class InvoiceRepository: IInvoiceRepository
         _context.Add(invoice);
     }
 
-    public async Task<List<Invoice>> GetInvoices()
+    public async Task<List<Invoice>> GetInvoicesAsync()
     {
         var invoices = from n in _context.Invoices select n;
         return await invoices.ToListAsync();
