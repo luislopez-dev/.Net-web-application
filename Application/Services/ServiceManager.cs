@@ -4,14 +4,13 @@ using Business.Interfaces;
 namespace Application.Services;
 
 public sealed class ServiceManager: IServiceManager
-
 {
-    public IInvoiceService InvoiceService { get; }
     public IProductService ProductService { get; }
+    public IInvoiceService InvoiceService { get; }
 
-    public ServiceManager(IInvoiceService invoiceService, IProductService productService)
+    public ServiceManager(IProductService productService, IInvoiceService invoiceService)
     {
-        InvoiceService = invoiceService;
         ProductService = productService;
+        InvoiceService = invoiceService;
     }
 }
