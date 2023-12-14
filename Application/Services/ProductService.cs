@@ -25,10 +25,10 @@ public class ProductService: IProductService
     }
     public Task<List<Product>> GetProducts()
     {
-        return _unitOfWork.ProductRepository.GetProducts();
+        return _unitOfWork.ProductRepository.GetProductsAsync();
     }
     public Task<Product> GetProduct(int id)
     {
-        return _unitOfWork.ProductRepository.GetProduct(id);
+        return _unitOfWork.ProductRepository.GetProductAsync(id);
     }
 }
