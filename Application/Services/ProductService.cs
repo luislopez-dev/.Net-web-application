@@ -17,21 +17,18 @@ public class ProductService: IProductService
     }
     public void DeleteProduct(Product product)
     {
-        throw new NotImplementedException();
+        _unitOfWork.ProductRepository.DeleteProduct(product);
     }
-
     public void UpdateInvoice(Product product)
     {
-        throw new NotImplementedException();
+        _unitOfWork.ProductRepository.UpdateProduct(product);
     }
-
     public Task<List<Product>> GetProducts()
     {
-        throw new NotImplementedException();
+        return _unitOfWork.ProductRepository.GetProducts();
     }
-
-    public Task<Product> GetProduct()
+    public Task<Product> GetProduct(int id)
     {
-        throw new NotImplementedException();
+        return _unitOfWork.ProductRepository.GetProduct(id);
     }
 }
