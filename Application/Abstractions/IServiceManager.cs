@@ -2,5 +2,6 @@
 
 public interface IServiceManager
 {
-    
+    IInvoiceService InvoiceService { get; }
+    IProductService ProductService { get; }
 }
