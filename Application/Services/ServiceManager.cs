@@ -1,6 +1,8 @@
-﻿namespace Application.Services;
+﻿using Business.Interfaces;
 
-public class ServiceManager
+namespace Application.Services;
+
+public class ServiceManager: IServiceManager
 {
     
 }
