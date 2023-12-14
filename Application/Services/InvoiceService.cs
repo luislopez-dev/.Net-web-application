@@ -1,32 +1,19 @@
 ﻿using Application.Abstractions;
+using Business.Interfaces;
 using Business.Models;
 
 namespace Application.Services;
 
 public class InvoiceService: IInvoiceService
 {
+    private readonly IInvoiceRepository _invoiceRepository;
     public void AddInvoice(Invoice invoice)
     {
-        throw new NotImplementedException();
+        _invoiceRepository.AddInvoice(invoice);
     }
 
-    public void DeleteInvoice(Invoice invoice)
+    public async Task<List<Invoice>> GetInvoicesAsync()
     {
-        throw new NotImplementedException();
-    }
-
-    public void UpdateInvoice(Invoice invoice)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task GetInvoices()
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<Invoice> GetInvoice()
-    {
-        throw new NotImplementedException();
+        return await _invoiceRepository.GetInvoicesAsync();
     }
 }
