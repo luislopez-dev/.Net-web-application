@@ -1,6 +1,11 @@
-﻿namespace Business.Validations;
+﻿using Business.Models;
+using FluentValidation;
 
-public class ProductValidator
+namespace Business.Validations;
+
+public class ProductValidator: AbstractValidator<Product>
 {
-    
+    public ProductValidator()
+    {
+    }
 }
