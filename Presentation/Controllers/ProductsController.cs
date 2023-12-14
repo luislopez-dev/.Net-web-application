@@ -34,15 +34,19 @@ public class ProductsController : BaseController
     {
         return View();
     }
-
-    public async Task<IActionResult> Create(Product product)
+    
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Create([Bind("Name, Price, Stock, Description")]Product product)
     {
+        if (!ModelState.IsValid) return View(product);
+        
         _serviceManager
             .ProductService
             .AddProduct(product);
 
         await _unitOfWork.Complete();
-      
+        
         return RedirectToAction(nameof(Index));
     }
 }
