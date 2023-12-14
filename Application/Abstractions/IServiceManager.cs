@@ -1,7 +1,9 @@
-﻿namespace Application.Abstractions;
+﻿using Business.Interfaces;
+
+namespace Application.Abstractions;
 
 public interface IServiceManager
 {
-    IInvoiceService InvoiceService { get; }
-    IProductService ProductService { get; }
+   IProductService ProductService { get; }
+   IInvoiceService InvoiceService { get; }
 }
