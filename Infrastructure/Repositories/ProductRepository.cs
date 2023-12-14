@@ -12,12 +12,10 @@ public class ProductRepository: IProductRepository
     {
         _context = context;
     }
-
     public void AddProduct(Product product)
     {
-        throw new NotImplementedException();
+        _context.Add(product);
     }
-
     public void DeleteProduct(Product product)
     {
         throw new NotImplementedException();
