@@ -1,6 +1,7 @@
 ﻿using Business.Interfaces;
 using Business.Models;
 using Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 
@@ -18,21 +19,24 @@ public class ProductRepository: IProductRepository
     }
     public void DeleteProduct(Product product)
     {
-        throw new NotImplementedException();
+        _context.Remove(product);
     }
-
-    public void UpdateInvoice(Product product)
+    public void UpdateProduct(Product product)
     {
-        throw new NotImplementedException();
+        _context.Entry(product).State = EntityState.Modified;
     }
-
-    public Task<List<Product>> GetProducts()
+    public async Task<List<Product>> GetProducts()
     {
-        throw new NotImplementedException();
+        var products = from n in _context.Products select n;
+        
+        return await products.ToListAsync();
     }
-
-    public Task<Product> GetProduct()
+    public async Task<Product> GetProduct(int id)
     {
-        throw new NotImplementedException();
+        var product = await _context
+            .Products
+            .FirstOrDefaultAsync(m => m.Id == id);
+        
+        return product;
     }
 }
