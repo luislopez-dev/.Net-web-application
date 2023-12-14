@@ -25,13 +25,13 @@ public class ProductRepository: IProductRepository
     {
         _context.Entry(product).State = EntityState.Modified;
     }
-    public async Task<List<Product>> GetProducts()
+    public async Task<List<Product>> GetProductsAsync()
     {
         var products = from n in _context.Products select n;
         
         return await products.ToListAsync();
     }
-    public async Task<Product> GetProduct(int id)
+    public async Task<Product> GetProductAsync(int id)
     {
         var product = await _context
             .Products
