@@ -1,9 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Application.Abstractions;
+using Business.Interfaces;
+using Business.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.Controllers;
 
 public class ProductsController : BaseController
 {
+    private readonly IServiceManager _serviceManager;
+    private readonly IUnitOfWork _unitOfWork;
+
+    public ProductsController(IServiceManager serviceManager, IUnitOfWork unitOfWork)
+    {
+        _serviceManager = serviceManager;
+        _unitOfWork = unitOfWork;
+    }
+    
     public IActionResult Index()
     {
         return View();
@@ -23,8 +35,14 @@ public class ProductsController : BaseController
         return View();
     }
 
-    public IActionResult Create()
+    public async Task<IActionResult> Create(Product product)
     {
-        return View();
+        _serviceManager
+            .ProductService
+            .AddProduct(product);
+
+        await _unitOfWork.Complete();
+      
+        return RedirectToAction(nameof(Index));
     }
 }
