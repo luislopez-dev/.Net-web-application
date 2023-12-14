@@ -1,6 +1,7 @@
 ﻿using Business.Interfaces;
 using Business.Models;
 using Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 
@@ -15,11 +16,12 @@ public class InvoiceRepository: IInvoiceRepository
 
     public void AddInvoice(Invoice invoice)
     {
-        throw new NotImplementedException();
+        _context.Add(invoice);
     }
 
-    public Task<List<Invoice>> GetInvoices()
+    public async Task<List<Invoice>> GetInvoices()
     {
-        throw new NotImplementedException();
+        var invoices = from n in _context.Invoices select n;
+        return await invoices.ToListAsync();
     }
 }
