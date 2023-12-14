@@ -1,6 +1,9 @@
-﻿namespace Business.Validations;
+﻿using Business.Models;
+using FluentValidation;
 
-public class InvoiceValidator
+namespace Business.Validations;
+
+public class InvoiceValidator: AbstractValidator<Invoice>
 {
     
 }
