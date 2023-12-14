@@ -8,5 +8,5 @@ public interface IProductService
     public void DeleteProduct(Product product);
     public void UpdateInvoice(Product product);
     public Task<List<Product>> GetProducts();
-    public Task<Product> GetProduct();
+    public Task<Product> GetProduct(int id);
 }
