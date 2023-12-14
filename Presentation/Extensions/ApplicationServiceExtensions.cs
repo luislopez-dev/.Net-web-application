@@ -1,4 +1,5 @@
-﻿using Application.Services;
+﻿using Application.Abstractions;
+using Application.Services;
 using Business.Interfaces;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
@@ -15,8 +16,8 @@ public static class ApplicationServiceExtensions
                 opt.UseSqlServer((config.GetConnectionString("app")));
             }
         );
-       // services.AddScoped<IUnitOfWork, UnitOfWork>();
-       // services.AddScoped<IServiceManager, ServiceManager>();
+       services.AddScoped<IUnitOfWork, UnitOfWork>();
+       services.AddScoped<IServiceManager, ServiceManager>();
         
         return services;
     }
