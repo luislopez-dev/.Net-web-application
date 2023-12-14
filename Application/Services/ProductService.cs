@@ -23,12 +23,12 @@ public class ProductService: IProductService
     {
         _unitOfWork.ProductRepository.UpdateProduct(product);
     }
-    public Task<List<Product>> GetProducts()
+    public async Task<List<Product>> GetProductsAsync()
     {
-        return _unitOfWork.ProductRepository.GetProductsAsync();
+        return await _unitOfWork.ProductRepository.GetProductsAsync();
     }
-    public Task<Product> GetProduct(int id)
+    public async Task<Product> GetProductAsync(int id)
     {
-        return _unitOfWork.ProductRepository.GetProductAsync(id);
+        return await _unitOfWork.ProductRepository.GetProductAsync(id);
     }
 }
