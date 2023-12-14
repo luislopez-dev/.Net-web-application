@@ -1,4 +1,4 @@
-﻿namespace Business.Interfaces;
+﻿namespace Application.Abstractions;
 
 public interface IServiceManager
 {

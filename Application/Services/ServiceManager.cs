@@ -2,7 +2,7 @@
 
 namespace Application.Services;
 
-public class ServiceManager: IServiceManager
+public class ServiceManager
 {
     
 }
