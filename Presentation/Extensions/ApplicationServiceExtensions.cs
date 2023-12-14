@@ -1,9 +1,10 @@
-﻿using Business.Interfaces;
+﻿using Application.Services;
+using Business.Interfaces;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Extensions;
+namespace Presentation.Extensions;
 
 public static class ApplicationServiceExtensions
 {
@@ -15,7 +16,8 @@ public static class ApplicationServiceExtensions
             }
         );
         services.AddScoped<IUnitOfWork, UnitOfWork>();
-        services.AddScoped<>()
+        services.AddScoped<IServiceManager, ServiceManager>();
+        
         return services;
     }
 
