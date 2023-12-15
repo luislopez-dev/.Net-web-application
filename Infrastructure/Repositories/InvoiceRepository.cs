@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 
-public class InvoiceRepository: IInvoiceRepository
+internal class InvoiceRepository: IInvoiceRepository
 {
     private readonly DataContext _context;
 
