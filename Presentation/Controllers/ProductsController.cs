@@ -16,23 +16,42 @@ public class ProductsController : BaseController
         _unitOfWork = unitOfWork;
     }
     
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        return View();
+        var products = await _serviceManager
+            .ProductService
+            .GetProductsAsync();
+        
+        return View(products);
     }
 
-    public void Delete(int? id)
+    public async Task<IActionResult> Delete(Product product)
     {
+        _serviceManager.ProductService.DeleteProduct(product);
+        
+        await _unitOfWork.CompleteAsync();
+        
+        return RedirectToAction(nameof(Index));
     }
 
-    public IActionResult Details(int? id)
+    public async Task<IActionResult> Details(int id)
     {
-        return View();
+        var product = await _serviceManager.
+            ProductService
+            .GetProductAsync(id);
+        
+        return View(product);
     }
 
-    public IActionResult Edit(int? id)
+    public async Task<IActionResult> Edit(Product product)
     {
-        return View();
+        _serviceManager
+            .ProductService
+            .UpdateProduct(product);
+        
+        await _unitOfWork.CompleteAsync();
+
+        return RedirectToAction(nameof(Index));
     }
     
     [HttpPost]
@@ -45,7 +64,7 @@ public class ProductsController : BaseController
             .ProductService
             .AddProduct(product);
 
-        await _unitOfWork.Complete();
+        await _unitOfWork.CompleteAsync();
         
         return RedirectToAction(nameof(Index));
     }
