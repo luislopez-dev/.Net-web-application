@@ -13,7 +13,7 @@ public class UnitOfWork: IUnitOfWork
     }
     public IProductRepository ProductRepository => new ProductRepository(_context);
     public IInvoiceRepository InvoiceRepository => new InvoiceRepository(_context);
-    public async Task<bool> Complete()
+    public async Task<bool> CompleteAsync()
     {
         return await _context.SaveChangesAsync() > 0;
     }
