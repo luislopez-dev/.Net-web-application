@@ -4,16 +4,24 @@ using Business.Models;
 
 namespace Application.Services;
 
-public class InvoiceService: IInvoiceService
+internal class InvoiceService: IInvoiceService
 {
-    private readonly IInvoiceRepository _invoiceRepository;
+    private readonly IServiceManager _serviceManager;
+
+    public InvoiceService(IServiceManager serviceManager)
+    {
+        _serviceManager = serviceManager;
+    }
     public void AddInvoice(Invoice invoice)
     {
-        _invoiceRepository.AddInvoice(invoice);
+        _serviceManager
+            .InvoiceService
+            .AddInvoice(invoice);
     }
-
     public async Task<List<Invoice>> GetInvoicesAsync()
     {
-        return await _invoiceRepository.GetInvoicesAsync();
+        return await _serviceManager
+            .InvoiceService
+            .GetInvoicesAsync();
     }
 }
