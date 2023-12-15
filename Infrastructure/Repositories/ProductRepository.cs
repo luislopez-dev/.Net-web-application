@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 
-public class ProductRepository: IProductRepository
+internal class ProductRepository: IProductRepository
 {
     private readonly DataContext _context;
 
