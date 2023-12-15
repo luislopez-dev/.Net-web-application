@@ -4,6 +4,6 @@ public interface IUnitOfWork
 {
     IProductRepository ProductRepository { get; }
     IInvoiceRepository InvoiceRepository { get; }
-    Task<bool> Complete();
+    Task<bool> CompleteAsync();
     bool HasChanges();
 }
