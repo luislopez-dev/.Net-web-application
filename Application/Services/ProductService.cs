@@ -19,7 +19,7 @@ public class ProductService: IProductService
     {
         _unitOfWork.ProductRepository.DeleteProduct(product);
     }
-    public void UpdateInvoice(Product product)
+    public void UpdateProduct(Product product)
     {
         _unitOfWork.ProductRepository.UpdateProduct(product);
     }
