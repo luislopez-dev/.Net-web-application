@@ -24,22 +24,7 @@ public class ProductsController : BaseController
         
         return View(products);
     }
-
-    public async Task<IActionResult> Delete(int id)
-    {
-        if (id == null)
-        {
-            return NotFound();
-        }
-        var product = await _serviceManager.ProductService.GetProductAsync(id);
-
-        if (product == null)
-        {
-            return NotFound();
-        }
-        return View(product);
-    }
-
+    
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(Product product)
