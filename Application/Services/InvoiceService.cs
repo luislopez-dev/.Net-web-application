@@ -6,22 +6,24 @@ namespace Application.Services;
 
 public class InvoiceService: IInvoiceService
 {
-    private readonly IServiceManager _serviceManager;
 
-    public InvoiceService(IServiceManager serviceManager)
+    private readonly IUnitOfWork _unitOfWork;
+
+    public InvoiceService(IUnitOfWork unitOfWork)
     {
-        _serviceManager = serviceManager;
+        _unitOfWork = unitOfWork;
     }
+
     public void AddInvoice(Invoice invoice)
     {
-        _serviceManager
-            .InvoiceService
+        _unitOfWork
+            .InvoiceRepository
             .AddInvoice(invoice);
     }
     public async Task<List<Invoice>> GetInvoicesAsync()
     {
-        return await _serviceManager
-            .InvoiceService
+        return await _unitOfWork
+            .InvoiceRepository
             .GetInvoicesAsync();
     }
 }
