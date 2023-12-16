@@ -13,11 +13,11 @@ public static class ApplicationServiceExtensions
     {
         services.AddDbContext<DataContext>(opt =>
             {
-                opt.UseSqlServer((config.GetConnectionString("app")));
+                opt.UseSqlServer(config.GetConnectionString("app"));
             }
-        );
-       services.AddScoped<IUnitOfWork, UnitOfWork>();
-       services.AddScoped<IServiceManager, ServiceManager>();
+        );        
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
+        // services.AddScoped<IServiceManager, ServiceManager>();
         
         return services;
     }

@@ -4,7 +4,7 @@ using Business.Models;
 
 namespace Application.Services;
 
-internal class InvoiceService: IInvoiceService
+public class InvoiceService: IInvoiceService
 {
     private readonly IServiceManager _serviceManager;
 

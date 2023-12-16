@@ -1,6 +1,15 @@
+using Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
-app.MapGet("/", () => "Hello World!");
+/*
+builder.Services.AddDbContext<DataContext>(opt =>
+    {
+        opt.UseSqlServer(builder.Configuration.GetConnectionString("app"));
+    }
+);
+*/
 
 app.Run();

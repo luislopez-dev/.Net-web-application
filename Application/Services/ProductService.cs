@@ -4,7 +4,7 @@ using Business.Models;
 
 namespace Application.Services;
 
-internal class ProductService: IProductService
+public class ProductService: IProductService
 {
     private readonly IUnitOfWork _unitOfWork;
     public ProductService(IUnitOfWork unitOfWork)
