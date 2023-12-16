@@ -25,4 +25,8 @@
       <ProjectReference Include="..\Presentation.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Views\" />
+    </ItemGroup>
+
 </Project>
