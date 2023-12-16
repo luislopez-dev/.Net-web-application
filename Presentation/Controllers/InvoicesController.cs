@@ -26,6 +26,11 @@ public class InvoicesController : BaseController
         return View(products);
     }
     
+    public IActionResult Create()
+    {
+        return View();
+    }
+    
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create([Bind("ClientName", "ClientNit", "Products", "PaymentMethod", "ClientAddress")] Invoice invoice)
@@ -36,6 +41,6 @@ public class InvoicesController : BaseController
 
         await _unitOfWork.CompleteAsync();
             
-        return View(nameof(Index));
+        return RedirectToAction(nameof(Index));
     }
 }
