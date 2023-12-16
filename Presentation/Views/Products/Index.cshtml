@@ -40,14 +40,14 @@
                 <td>@product.Stock</td>
                 <td>@product.Description</td>
                 <td>
-                    <a href="">
+                    <a asp-action="Details" asp-route-id="@product.Id">
                         <button type="button" class="btn btn-success">
                             <i class="bi bi-eye"></i>
                         </button>
                     </a>
                 </td>
                 <td>
-                    <a href="">
+                    <a asp-action="Edit" asp-route-id="@product.Id">
                         <button type="button" class="btn btn-warning">
                             <i class="bi bi-pencil"></i>
                         </button>
