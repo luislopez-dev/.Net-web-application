@@ -31,52 +31,55 @@
             </tr>
             </thead>
             <tbody>
+            @foreach (var product in Model)
+            {
                 <tr>
-                    <td>#</td>
-                    <td>name</td>
-                    <td>price</td>
-                    <td>stock</td>
-                    <td>description</td>
-                    <td>
-                        <a href="">
-                            <button type="button" class="btn btn-success">
-                                <i class="bi bi-eye"></i>
-                            </button>
-                        </a>
-                    </td>
-                    <td>
-                        <a href="">
-                            <button type="button" class="btn btn-warning">
-                                <i class="bi bi-pencil"></i>
-                            </button>
-                        </a>
-                    </td>
-                    <td>
-                        <button type="submit" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ModalDelete-x">
-                            <i class="bi bi-trash"></i>
+                <td>#</td>
+                <td>@product.Name</td>
+                <td>@product.Price</td>
+                <td>@product.Stock</td>
+                <td>@product.Description</td>
+                <td>
+                    <a href="">
+                        <button type="button" class="btn btn-success">
+                            <i class="bi bi-eye"></i>
                         </button>
-                        <!-- Modal Delete -->
-                        <div class="modal fade" id="ModalDelete-x" tabindex="-1" aria-labelledby="Modal-Delete" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar producto</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        name
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <form method="POST" action="x">
-                                            <button type="submit" class="btn btn-danger">Eliminar</button>
-                                        </form>
-                                    </div>
+                    </a>
+                </td>
+                <td>
+                    <a href="">
+                        <button type="button" class="btn btn-warning">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                    </a>
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ModalDelete-@product.Id">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                    <!-- Modal Delete -->
+                    <div class="modal fade" id="ModalDelete-@product.Id" tabindex="-1" aria-labelledby="Modal-Delete" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar producto</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    @product.Name
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <form method="POST" action="x">
+                                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
-                    </td>
+                    </div>
+                </td>
                 </tr>
+            }
             </tbody>
         </table>
         <div class="alert alert-info" role="alert">
