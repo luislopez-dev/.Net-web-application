@@ -25,7 +25,24 @@ public class ProductsController : BaseController
         return View(products);
     }
 
-    public async Task<IActionResult> Delete(Product product)
+    public async Task<IActionResult> Delete(int id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+        var product = await _serviceManager.ProductService.GetProductAsync(id);
+
+        if (product == null)
+        {
+            return NotFound();
+        }
+        return View(product);
+    }
+
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteConfirmed(Product product)
     {
         _serviceManager.ProductService.DeleteProduct(product);
         
@@ -43,6 +60,8 @@ public class ProductsController : BaseController
         return View(product);
     }
 
+    [HttpPost]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(Product product)
     {
         _serviceManager
@@ -52,6 +71,22 @@ public class ProductsController : BaseController
         await _unitOfWork.CompleteAsync();
 
         return RedirectToAction(nameof(Index));
+    }
+
+    public async Task<IActionResult> Edit(int id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        var product = await _serviceManager.ProductService.GetProductAsync(id);
+
+        if (product == null)
+        {
+            return NotFound();
+        }
+        return View(product);
     }
     
     [HttpPost]
