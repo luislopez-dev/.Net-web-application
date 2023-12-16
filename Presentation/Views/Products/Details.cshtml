@@ -8,8 +8,8 @@
 <h2>title</h2>
 
 <ul class="list-group">
-    <li class="list-group-item">Nombre del producto: Nombre</li>
-    <li class="list-group-item">Precio: QPrecio</li>
-    <li class="list-group-item">Stock disponible: Stock</li>
-    <li class="list-group-item">Descripción: Descripción</li>
+    <li class="list-group-item">Nombre del producto: @Model.Name</li>
+    <li class="list-group-item">Precio: @("Q" + Model.Price)</li>
+    <li class="list-group-item">Stock disponible: @Model.Stock</li>
+    <li class="list-group-item">Descripción: @Model.Description</li>
 </ul>
