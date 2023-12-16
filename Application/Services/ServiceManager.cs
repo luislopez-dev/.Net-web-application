@@ -5,12 +5,13 @@ namespace Application.Services;
 
 public sealed class ServiceManager: IServiceManager
 {
-    public IProductService ProductService { get; }
-    public IInvoiceService InvoiceService { get; }
+    private readonly IUnitOfWork _unitOfWork;
 
-    public ServiceManager(IProductService productService, IInvoiceService invoiceService)
+    public ServiceManager(IUnitOfWork unitOfWork)
     {
-        ProductService = productService;
-        InvoiceService = invoiceService;
+        _unitOfWork = unitOfWork;
     }
+
+    public IProductService ProductService => new ProductService(_unitOfWork);
+    public IInvoiceService InvoiceService => new InvoiceService(_unitOfWork);
 }
