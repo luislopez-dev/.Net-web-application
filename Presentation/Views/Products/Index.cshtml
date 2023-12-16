@@ -34,7 +34,7 @@
             @foreach (var product in Model)
             {
                 <tr>
-                <td>#</td>
+                <td>@(Model.IndexOf(product) + 1)</td>
                 <td>@product.Name</td>
                 <td>@product.Price</td>
                 <td>@product.Stock</td>
