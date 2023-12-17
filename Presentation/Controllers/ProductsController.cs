@@ -5,29 +5,17 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.Controllers;
 
-/// <summary>
-/// 
-/// </summary>
 public class ProductsController : BaseController
 {
     private readonly IServiceManager _serviceManager;
     private readonly IUnitOfWork _unitOfWork;
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="serviceManager"></param>
-    /// <param name="unitOfWork"></param>
     public ProductsController(IServiceManager serviceManager, IUnitOfWork unitOfWork)
     {
         _serviceManager = serviceManager;
         _unitOfWork = unitOfWork;
     }
     
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
     public async Task<IActionResult> Index()
     {
         var products = await _serviceManager
@@ -37,27 +25,23 @@ public class ProductsController : BaseController
         return View(products);
     }
     
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="product"></param>
-    /// <returns></returns>
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(Product product)
     {
         _serviceManager.ProductService.DeleteProduct(product);
-        
-        await _unitOfWork.CompleteAsync();
-        
+
+        if (await _unitOfWork.CompleteAsync())
+        {
+            TempData["message"] = "Producto eliminado exitosamente";
+            
+            return RedirectToAction(nameof(Index));
+        }
+
         return RedirectToAction(nameof(Index));
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
+   
     public async Task<IActionResult> Details(int id)
     {
         var product = await _serviceManager.
@@ -67,11 +51,7 @@ public class ProductsController : BaseController
         return View(product);
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="product"></param>
-    /// <returns></returns>
+  
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(Product product)
@@ -79,17 +59,17 @@ public class ProductsController : BaseController
         _serviceManager
             .ProductService
             .UpdateProduct(product);
-        
-        await _unitOfWork.CompleteAsync();
+
+        if (await _unitOfWork.CompleteAsync())
+        {
+            TempData["message"] = "Producto actualizado exitosamente!";
+        }
+
+        ;
 
         return RedirectToAction(nameof(Index));
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
     public async Task<IActionResult> Edit(int id)
     {
         if (id == null)
@@ -106,11 +86,6 @@ public class ProductsController : BaseController
         return View(product);
     }
     
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="product"></param>
-    /// <returns></returns>
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create([Bind("Name, Price, Stock, Description")]Product product)
@@ -121,8 +96,16 @@ public class ProductsController : BaseController
             .ProductService
             .AddProduct(product);
 
-        await _unitOfWork.CompleteAsync();
-        
-        return RedirectToAction(nameof(Index));
+        if(await _unitOfWork.CompleteAsync())
+        {
+            TempData["message"] = "Producto creado exitosamente!";
+            return RedirectToAction(nameof(Index));
+        };
+        return RedirectToAction("Index");
+    }
+
+    public ActionResult Create()
+    {
+        return View();
     }
 }
