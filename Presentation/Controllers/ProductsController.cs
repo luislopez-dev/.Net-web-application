@@ -20,7 +20,7 @@ public class ProductsController : BaseController
     {
         var products = await _serviceManager
             .ProductService
-            .GetProductsAsync();
+            .GetProductsPaginatedAsync();
         
         return View(products);
     }
@@ -46,7 +46,7 @@ public class ProductsController : BaseController
     {
         var product = await _serviceManager.
             ProductService
-            .GetProductAsync(id);
+            .GetProductByIdAsync(id);
         
         return View(product);
     }
@@ -65,8 +65,6 @@ public class ProductsController : BaseController
             TempData["message"] = "Producto actualizado exitosamente!";
         }
 
-        ;
-
         return RedirectToAction(nameof(Index));
     }
 
@@ -77,7 +75,7 @@ public class ProductsController : BaseController
             return NotFound();
         }
 
-        var product = await _serviceManager.ProductService.GetProductAsync(id);
+        var product = await _serviceManager.ProductService.GetProductByIdAsync(id);
 
         if (product == null)
         {
@@ -107,5 +105,14 @@ public class ProductsController : BaseController
     public ActionResult Create()
     {
         return View();
+    }
+    
+    public async Task<IActionResult> Search(string productName)
+    {
+        var products = await _serviceManager
+            .ProductService
+            .GetProductsByNamePaginated(productName);
+        
+        return View("Index", products);
     }
 }
