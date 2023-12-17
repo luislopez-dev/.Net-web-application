@@ -13,22 +13,39 @@ public class ProductService: IProductService
     }
     public void AddProduct(Product product)
     {
-        _unitOfWork.ProductRepository.AddProduct(product);
+        _unitOfWork
+            .ProductRepository
+            .AddProduct(product);
     }
     public void DeleteProduct(Product product)
     {
-        _unitOfWork.ProductRepository.DeleteProduct(product);
+        _unitOfWork
+            .ProductRepository
+            .DeleteProduct(product);
     }
     public void UpdateProduct(Product product)
     {
-        _unitOfWork.ProductRepository.UpdateProduct(product);
+        _unitOfWork
+            .ProductRepository
+            .UpdateProduct(product);
     }
-    public async Task<List<Product>> GetProductsAsync()
+    public async Task<List<Product>> GetProductsPaginatedAsync()
     {
-        return await _unitOfWork.ProductRepository.GetProductsAsync();
+        return await _unitOfWork
+            .ProductRepository
+            .GetProductsPaginatedAsync();
     }
-    public async Task<Product> GetProductAsync(int id)
+    public async Task<Product> GetProductByIdAsync(int id)
     {
-        return await _unitOfWork.ProductRepository.GetProductAsync(id);
+        return await _unitOfWork
+            .ProductRepository
+            .GetProductByIdAsync(id);
+    }
+
+    public async Task<List<Product>> GetProductsByNamePaginated(string name)
+    {
+        return await _unitOfWork
+            .ProductRepository
+            .GetProductsByNamePaginated(name);
     }
 }
