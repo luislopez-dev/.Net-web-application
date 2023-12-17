@@ -25,18 +25,24 @@ internal class ProductRepository: IProductRepository
     {
         _context.Entry(product).State = EntityState.Modified;
     }
-    public async Task<List<Product>> GetProductsAsync()
+    public async Task<List<Product>> GetProductsPaginatedAsync()
     {
         var products = from n in _context.Products select n;
         
         return await products.ToListAsync();
     }
-    public async Task<Product> GetProductAsync(int id)
+    public async Task<Product> GetProductByIdAsync(int id)
     {
-        var product = await _context
+        return await _context
             .Products
             .FirstOrDefaultAsync(m => m.Id == id);
-        
-        return product;
+    }
+    public async Task<List<Product>> GetProductsByNamePaginated(string name)
+    {
+        return await _context
+            .Products
+            .Where(p => EF.Functions.Like(p.Name, $"%{name}%"))
+            .OrderBy(p => p.Id)
+            .ToListAsync();
     }
 }
