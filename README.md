@@ -1,3 +1,3 @@
 # Software architecture
 
-![Captura de pantalla (312)](https://github.com/luislopez-dev/.Net-webapp/assets/48783255/e912c4eb-eb0b-48ed-a1f8-cd3c02902490)
+![Captura de pantalla (313)](https://github.com/luislopez-dev/.Net-webapp/assets/48783255/5f84d347-cf7b-4241-b5d1-6d39c167864d)
