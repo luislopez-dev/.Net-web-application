@@ -6,6 +6,10 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <DocumentationFile>bin\Debug\Presentation.xml</DocumentationFile>
+    </PropertyGroup>
+
     <ItemGroup>
       <_ContentIncludedByDefault Remove="Pages\Products\Create.cshtml" />
       <_ContentIncludedByDefault Remove="Pages\Products\Delete.cshtml" />
