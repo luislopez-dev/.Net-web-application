@@ -70,7 +70,8 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                    <form method="POST" action="x">
+                                    <form asp-action="Delete">
+                                        <input type="hidden" asp-for="@product.Id" />
                                         <button type="submit" class="btn btn-danger">Eliminar</button>
                                     </form>
                                 </div>
