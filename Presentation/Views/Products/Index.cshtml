@@ -4,38 +4,42 @@
     ViewBag.Title = "title";
     Layout = "_Layout";
 }
-        <nav class="navbar bg-body-tertiary">
-          <div class="container-fluid">
-              <form class="d-flex">
-                <input class="form-control me-2" placeholder="Buscar" label="Search" />
-                <button class="btn btn-outline-primary" type="submit">Buscar</button>
-            </form>
-          </div>
-        </nav>
-        @if(TempData["message"] != null)
+<nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+        <form asp-action="Search" asp-controller="Products" class="d-flex">
+            <input name="productName" class="form-control me-2" placeholder="Buscar" label="Search" />
+            <button class="btn btn-outline-primary" type="submit">Buscar</button>
+        </form>
+    </div>
+</nav>
+@if(TempData["message"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["message"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+@if (Model.Count > 0)
+{
+    
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Stock</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Ver</th>
+            <th scope="col">Editar</th>
+            <th scope="col">Eliminar</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var product in Model)
         {
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                @TempData["message"]
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        }
-        <table class="table table-striped">
-            <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Precio</th>
-                <th scope="col">Stock</th>
-                <th scope="col">Descripción</th>
-                <th scope="col">Ver</th>
-                <th scope="col">Editar</th>
-                <th scope="col">Eliminar</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach (var product in Model)
-            {
-                <tr>
                 <td>@(Model.IndexOf(product) + 1)</td>
                 <td>@product.Name</td>
                 <td>@product.Price</td>
@@ -81,10 +85,14 @@
                         </div>
                     </div>
                 </td>
-                </tr>
-            }
-            </tbody>
-        </table>
-        <div class="alert alert-info" role="alert">
-            No se encontraron productos!
-        </div>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-info" role="alert">
+        No se encontraron productos!
+    </div>
+}
