@@ -6,22 +6,23 @@
 }
 
 <div>
-    <form method="POST" action="">
+    <form asp-action="Edit">
+        <input type="hidden" value="@Model.Id"/>
         <div class="mb-3">
-            <label for="InputName" class="form-label">Nombre</label>
-            <input name="name" value="@Model.Name" type="text" class="form-control" id="InputName" aria-describedby="name">
+            <label asp-for="Name" for="InputName" class="form-label">Nombre</label>
+            <input asp-for="Name" name="name" value="@Model.Name" type="text" class="form-control" id="InputName" aria-describedby="name">
         </div>
         <div class="mb-3">
-            <label for="InputPrice" class="form-label">Precio (Q)</label>
-            <input name="price" value="@Model.Price" type="number" class="form-control" id="InputPrice">
+            <label asp-for="Price" for="InputPrice" class="form-label">Precio (Q)</label>
+            <input asp-for="Price" name="price" value="@Model.Price" type="number" class="form-control" id="InputPrice">
         </div>
         <div class="mb-3">
-            <label for="InputStock" class="form-label">Stock</label>
-            <input name="stock" value="@Model.Stock" type="number" class="form-control" id="InputStock">
+            <label asp-for="Stock" for="InputStock" class="form-label">Stock</label>
+            <input asp-for="Stock" name="stock" value="@Model.Stock" type="number" class="form-control" id="InputStock">
         </div>
         <div class="mb-3">
             <label for="InputDescription" class="form-label">Descripción</label>
-            <textarea name="description" class="form-control" id="InputDescription" rows="3">@Model.Description</textarea>
+            <textarea asp-for="Description" name="description" class="form-control" id="InputDescription" rows="3">@Model.Description</textarea>
         </div>
         <button type="submit" class="btn btn-primary">Actualizar</button>
     </form>
