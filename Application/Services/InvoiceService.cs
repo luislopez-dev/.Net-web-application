@@ -20,7 +20,7 @@ public class InvoiceService: IInvoiceService
             .InvoiceRepository
             .AddInvoice(invoice);
     }
-    public async Task<List<Invoice>> GetInvoicesAsync()
+    public async Task<List<Invoice>> GetInvoicesPaginatedAsync()
     {
         return await _unitOfWork
             .InvoiceRepository
