@@ -97,9 +97,8 @@ public class ProductsController : BaseController
         if(await _unitOfWork.CompleteAsync())
         {
             TempData["message"] = "Producto creado exitosamente!";
-            return RedirectToAction(nameof(Index));
         };
-        return RedirectToAction("Index");
+        return RedirectToAction(nameof(Index));
     }
 
     public ActionResult Create()
