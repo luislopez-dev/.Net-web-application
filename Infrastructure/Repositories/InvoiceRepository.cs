@@ -30,9 +30,11 @@ internal class InvoiceRepository: IInvoiceRepository
     /// Returns all invoices through pagination 
     /// </summary>
     /// <returns></returns>
-    public async Task<List<Invoice>> GetInvoicesAsync()
+    public async Task<List<Invoice>> GetInvoicesPaginatedAsync()
     {
-        var invoices = from n in _context.Invoices select n;
-        return await invoices.ToListAsync();
+       return await _context.Invoices
+       .Include(invoice => invoice.Orders)
+       .ThenInclude(order => order.Product)
+       .ToListAsync();
     }
 }
