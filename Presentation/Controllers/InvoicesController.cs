@@ -21,7 +21,7 @@ public class InvoicesController : BaseController
     {
         var products = await _serviceManager
             .InvoiceService
-            .GetInvoicesAsync();
+            .GetInvoicesPaginatedAsync();
         
         return View(products);
     }
@@ -39,8 +39,9 @@ public class InvoicesController : BaseController
         
         _serviceManager.InvoiceService.AddInvoice(invoice);
 
-        await _unitOfWork.CompleteAsync();
-            
+        if(await _unitOfWork.CompleteAsync()){
+            TempData["message"] = "Factura creada exitosamente!";
+        }            
         return RedirectToAction(nameof(Index));
     }
 }
