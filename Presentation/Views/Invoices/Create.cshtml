@@ -6,23 +6,22 @@
 }
 
 <div>
-    <form method="POST" action="">
+    <form asp-action="create">
         <div class="mb-3">
-            <label for="InputName" class="form-label">Nombre del cliente</label>
-            <input type="text" name="client_name" class="form-control" id="InputName" aria-describedby="name">
+            <label asp-for="ClientName" class="form-label">Nombre del cliente</label>
+            <input type="text" asp-for="ClientName" class="form-control" aria-describedby="name">
         </div>
         <div class="mb-3">
-            <label for="InputStock" class="form-label">Dirección de envio</label>
-            <input type="text" name="client_billing_address" class="form-control" id="InputStock">
+            <label asp-for="ClientAddress" class="form-label">Dirección de envio</label>
+            <input type="text" asp-for="ClientAddress" class="form-control" >
         </div>
         <div class="mb-3">
-            <label for="InputStock" class="form-label">NIT del cliente</label>
-            <input type="text" name="client_nit" class="form-control" id="InputStock">
+            <label asp-for="ClientNit" class="form-label">NIT del cliente</label>
+            <input type="text" asp-for="ClientNit" class="form-control">
         </div>
         <div class="mb-3">
-            <label class="form-label">Método de pago</label>
-            <select name="payment_method" class="form-select">
-              <option>Seleccione el método de pago</option>
+            <label asp-for="PaymentMethod" class="form-label">Seleccione el método de pago</label>
+            <select asp-for="PaymentMethod" class="form-select">
               <option value="debit_card">Tarjeta de débito</option>
               <option value="credit_card">Tarjeta de crédito</option>
               <option value="cash">Efectivo</option>
@@ -30,10 +29,11 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Seleccione uno o más productos</label>
-            <select name="products[]" class="form-select" size="5" multiple aria-label="Multiple select example">
-                <option value="id">name</option>
-                <option value="id">name</option>
-                <option value="id">name</option>
+            <select name="selectedProducts[]" class="form-select" size="5" multiple aria-label="Multiple select example">
+                @foreach (var product in ViewBag.products)
+                {
+                    <option value="@product.Id">@product.Name</option>
+                }
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Enviar</button>
