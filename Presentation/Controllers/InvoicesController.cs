@@ -19,29 +19,41 @@ public class InvoicesController : BaseController
 
     public async Task<IActionResult> Index()
     {
-        var products = await _serviceManager
+        var invoices = await _serviceManager
             .InvoiceService
             .GetInvoicesPaginatedAsync();
         
-        return View(products);
+        return View(invoices);
     }
     
-    public IActionResult Create()
+    public async Task<IActionResult> Create()
     {
+        ViewBag.products = await _serviceManager
+            .ProductService
+            .GetProductsPaginatedAsync();
+        
         return View();
     }
     
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("ClientName", "ClientNit", "Products", "PaymentMethod", "ClientAddress")] Invoice invoice)
+    public async Task<IActionResult> Create([Bind("ClientName", "ClientNit", "PaymentMethod", "ClientAddress")] Invoice invoice, int[] selectedProducts)
     {
-        if (ModelState.IsValid!) return View(nameof(Index));
+        if (!ModelState.IsValid)
+        {
+            TempData["message"] = "Campos invalidos!";
+            return View(nameof(Index));
+        }
         
-        _serviceManager.InvoiceService.AddInvoice(invoice);
-
+        _serviceManager.InvoiceService.AddInvoice(invoice, selectedProducts);
+        
         if(await _unitOfWork.CompleteAsync()){
             TempData["message"] = "Factura creada exitosamente!";
-        }            
+        }
+        else
+        {
+            TempData["message"] = "Hubo un error en la creación de la factura!";
+        }
         return RedirectToAction(nameof(Index));
     }
 }
