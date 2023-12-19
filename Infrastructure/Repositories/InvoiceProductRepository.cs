@@ -1,4 +1,5 @@
 ﻿using Business.Interfaces;
+using Business.Models;
 using Infrastructure.Data;
 
 namespace Infrastructure.Repositories;
@@ -13,6 +14,14 @@ internal class InvoiceProductRepository : IInvoiceProductRepository
     }
     public void CreateRecord(int invoiceId, int[] selectedProducts)
     {
-        throw new NotImplementedException();
+        foreach (var productId in selectedProducts)
+        {
+            var record = new InvoiceProduct
+            {
+                InvoiceId = invoiceId,
+                ProductId = productId
+            };
+            _context.InvoiceProducts.Add(record);
+        }
     }
 }
