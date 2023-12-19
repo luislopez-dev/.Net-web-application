@@ -7,19 +7,18 @@ namespace Presentation.Controllers;
 
 public class ProductsController : BaseController
 {
-    private readonly IServiceManager _serviceManager;
+    private readonly IProductService _productService;
     private readonly IUnitOfWork _unitOfWork;
 
-    public ProductsController(IServiceManager serviceManager, IUnitOfWork unitOfWork)
+    public ProductsController(IProductService productService, IUnitOfWork unitOfWork)
     {
-        _serviceManager = serviceManager;
+        _productService = productService;
         _unitOfWork = unitOfWork;
     }
-    
+
     public async Task<IActionResult> Index()
     {
-        var products = await _serviceManager
-            .ProductService
+        var products = await _productService
             .GetProductsPaginatedAsync();
         
         return View(products);
@@ -29,7 +28,8 @@ public class ProductsController : BaseController
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(Product product)
     {
-        _serviceManager.ProductService.DeleteProduct(product);
+        _productService
+        .DeleteProduct(product);
 
         if (await _unitOfWork.CompleteAsync())
         {
@@ -41,11 +41,10 @@ public class ProductsController : BaseController
         return RedirectToAction(nameof(Index));
     }
 
-   
     public async Task<IActionResult> Details(int id)
     {
-        var product = await _serviceManager.
-            ProductService
+        var product = await 
+            _productService
             .GetProductByIdAsync(id);
         
         return View(product);
@@ -56,8 +55,7 @@ public class ProductsController : BaseController
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(Product product)
     {
-        _serviceManager
-            .ProductService
+        _productService
             .UpdateProduct(product);
 
         if (await _unitOfWork.CompleteAsync())
@@ -75,7 +73,9 @@ public class ProductsController : BaseController
             return NotFound();
         }
 
-        var product = await _serviceManager.ProductService.GetProductByIdAsync(id);
+        var product = await 
+            _productService
+            .GetProductByIdAsync(id);
 
         if (product == null)
         {
@@ -89,9 +89,8 @@ public class ProductsController : BaseController
     public async Task<IActionResult> Create([Bind("Name, Price, Stock, Description")]Product product)
     {
         if (!ModelState.IsValid) return View(product);
-        
-        _serviceManager
-            .ProductService
+            
+            _productService
             .AddProduct(product);
 
         if(await _unitOfWork.CompleteAsync())
@@ -108,8 +107,8 @@ public class ProductsController : BaseController
     
     public async Task<IActionResult> Search(string productName)
     {
-        var products = await _serviceManager
-            .ProductService
+        var products = await
+            _productService
             .GetProductsByNamePaginated(productName);
         
         return View("Index", products);
