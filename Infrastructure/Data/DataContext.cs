@@ -10,18 +10,18 @@ public class DataContext: DbContext
     }
     public DbSet<Product> Products { get; set; }
     public DbSet<Invoice> Invoices { get; set; }
-    public DbSet<Order> Orders { get; set; }
+    public DbSet<InvoiceProduct> InvoiceProducts { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.Entity<Order>()
+        modelBuilder.Entity<InvoiceProduct>()
             .HasOne(o => o.Invoice)
             .WithMany(i => i.Orders)
             .HasForeignKey(o => o.InvoiceId);
 
-        modelBuilder.Entity<Order>()
+        modelBuilder.Entity<InvoiceProduct>()
             .HasOne(o => o.Product)
             .WithMany(p => p.Orders)
             .HasForeignKey(o => o.ProductId);
