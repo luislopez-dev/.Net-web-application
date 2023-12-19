@@ -1,6 +1,19 @@
-﻿namespace Application.Services;
+﻿using Application.Abstractions;
+using Business.Interfaces;
+using Business.Models;
 
-internal class OrderService
+namespace Application.Services;
+
+public class OrderService : IOrderService
 {
-    
+    private readonly IUnitOfWork _unitOfWork;
+
+    public OrderService(IUnitOfWork unitOfWork)
+    {
+        _unitOfWork = unitOfWork;
+    }
+    public void CreateOrder(Invoice invoice, int[] selectedProducts)
+    {
+        
+    }
 }
