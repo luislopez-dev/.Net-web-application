@@ -3,15 +3,15 @@ using Infrastructure.Data;
 
 namespace Infrastructure.Repositories;
 
-internal class OrderRepository : IOrderRepository
+internal class InvoiceProductRepository : IInvoiceProductRepository
 {
     private readonly DataContext _context;
 
-    public OrderRepository(DataContext context)
+    public InvoiceProductRepository(DataContext context)
     {
         _context = context;
     }
-    public void CreateOrder(int invoiceId, int[] selectedProducts)
+    public void CreateRecord(int invoiceId, int[] selectedProducts)
     {
         throw new NotImplementedException();
     }
