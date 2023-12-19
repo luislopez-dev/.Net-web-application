@@ -17,19 +17,11 @@ internal class InvoiceRepository: IInvoiceRepository
         _context = context;
     }
     
-    /// <summary>
-    /// Create a new invoice record in the db
-    /// </summary>
-    /// <param name="invoice"></param>
     public void AddInvoice(Invoice invoice)
     {
         _context.Add(invoice);
     }
-
-    /// <summary>
-    /// Returns all invoices through pagination 
-    /// </summary>
-    /// <returns></returns>
+    
     public async Task<List<Invoice>> GetInvoicesPaginatedAsync()
     {
        return await _context.Invoices
