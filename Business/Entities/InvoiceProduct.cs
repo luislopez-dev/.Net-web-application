@@ -1,6 +1,6 @@
 ﻿namespace Business.Models;
 
-public class Order
+public class InvoiceProduct
 {
     public int Id { get; set; }
 
