@@ -6,7 +6,6 @@ namespace Application.Services;
 
 public class InvoiceService: IInvoiceService
 {
-
     private readonly IUnitOfWork _unitOfWork;
 
     public InvoiceService(IUnitOfWork unitOfWork)
@@ -14,7 +13,7 @@ public class InvoiceService: IInvoiceService
         _unitOfWork = unitOfWork;
     }
 
-    public void AddInvoice(Invoice invoice)
+    public void AddInvoice(Invoice invoice, int[] selectedProducts)
     {
         invoice.Total = 10;
         invoice.Discount = 2;
@@ -22,6 +21,10 @@ public class InvoiceService: IInvoiceService
         _unitOfWork
             .InvoiceRepository
             .AddInvoice(invoice);
+        
+        _unitOfWork
+            .InvoiceProductRepository
+            .CreateRecord(invoice.Id, selectedProducts);
     }
     public async Task<List<Invoice>> GetInvoicesPaginatedAsync()
     {
