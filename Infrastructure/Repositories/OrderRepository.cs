@@ -2,7 +2,7 @@
 
 namespace Infrastructure.Repositories;
 
-public class OrderRepository
+internal class OrderRepository
 {
     private readonly DataContext _context;
 
