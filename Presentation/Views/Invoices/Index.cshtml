@@ -12,8 +12,14 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 }
-@if (Model.Count > 0)
+<ul>
+@foreach (var error in ViewData.ModelState.Values.SelectMany(modelState => modelState.Errors))
+{  <li>@error</li>  }    
+</ul>
+
+@if (Model != null && Model.Count > 0)
 {
+    
 <table class="table table-striped">
     <thead>
         <tr>
@@ -37,7 +43,6 @@
             <td>@invoice.ClientAddress</td>
             <td>@invoice.ClientNit</td>
             <td>@invoice.PaymentMethod</td>
-            <td>@invoice.Taxes</td>
             <td>@invoice.Discount</td>
             <td>
                 <select class="form-select" aria-label="products">
