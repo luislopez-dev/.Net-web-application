@@ -17,7 +17,9 @@ public static class ApplicationServiceExtensions
             }
         );        
         services.AddScoped<IUnitOfWork, UnitOfWork>();
-        services.AddScoped<IServiceManager, ServiceManager>();
+        services.AddScoped<IOrderService, OrderService>();
+        services.AddScoped<IProductService, ProductService>();
+        services.AddScoped<IInvoiceService, IInvoiceService>();
         
         return services;
     }
