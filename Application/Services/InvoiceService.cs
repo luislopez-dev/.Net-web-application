@@ -16,6 +16,9 @@ public class InvoiceService: IInvoiceService
 
     public void AddInvoice(Invoice invoice)
     {
+        invoice.Total = 10;
+        invoice.Discount = 2;
+        
         _unitOfWork
             .InvoiceRepository
             .AddInvoice(invoice);
@@ -24,6 +27,6 @@ public class InvoiceService: IInvoiceService
     {
         return await _unitOfWork
             .InvoiceRepository
-            .GetInvoicesAsync();
+            .GetInvoicesPaginatedAsync();
     }
 }
