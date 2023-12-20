@@ -28,7 +28,6 @@
             <th scope="col">Dirección de envio</th>
             <th scope="col">NIT</th>
             <th scope="col">Método de pago</th>
-            <th scope="col">Impuestos</th>
             <th scope="col">Descuento</th>
             <th scope="col">Productos</th>
             <th scope="col">Total</th>
@@ -43,7 +42,7 @@
             <td>@invoice.ClientAddress</td>
             <td>@invoice.ClientNit</td>
             <td>@invoice.PaymentMethod</td>
-            <td>@invoice.Discount</td>
+            <td>Q@(invoice.Discount)</td>
             <td>
                 <select class="form-select" aria-label="products">
                 @foreach(var product in invoice.InvoiceProducts.Select(order => order.Product)) 
@@ -52,7 +51,7 @@
                 }
                 </select>
             </td>
-            <td>Total</td>
+            <td>Q@(invoice.Total)</td>
         </tr>
     }
     </tbody>
