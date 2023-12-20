@@ -13,9 +13,9 @@ internal class ProductRepository: IProductRepository
     {
         _context = context;
     }
-    public void AddProduct(Product product)
+    public async Task AddProduct(Product product)
     {
-        _context.Add(product);
+        await _context.AddAsync(product);
     }
     public void DeleteProduct(Product product)
     {

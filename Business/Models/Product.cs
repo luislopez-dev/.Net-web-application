@@ -8,5 +8,5 @@ public class Product
     public int Stock { get; set; }
     public string Description { get; set; }
 
-    public List<InvoiceProduct> Orders { get; set; } = new List<InvoiceProduct>();
+    public List<InvoiceProduct> InvoiceProducts { get; set; } = new List<InvoiceProduct>();
 }

@@ -17,16 +17,16 @@ internal class InvoiceRepository: IInvoiceRepository
         _context = context;
     }
     
-    public void AddInvoice(Invoice invoice)
+    public async Task AddInvoice(Invoice invoice)
     {
-        _context.Add(invoice);
+        await _context.AddAsync(invoice);
     }
     
     public async Task<List<Invoice>> GetInvoicesPaginatedAsync()
     {
        return await _context.Invoices
-       .Include(invoice => invoice.Orders)
-       .ThenInclude(order => order.Product)
+       .Include(invoice => invoice.InvoiceProducts)
+       .ThenInclude(record => record.Product)
        .ToListAsync();
     }
 }

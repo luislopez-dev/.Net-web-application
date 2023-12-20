@@ -46,7 +46,7 @@
             <td>@invoice.Discount</td>
             <td>
                 <select class="form-select" aria-label="products">
-                @foreach(var product in invoice.Orders.Select(order => order.Product)) 
+                @foreach(var product in invoice.InvoiceProducts.Select(order => order.Product)) 
                 {
                     <option>@product.Name</option>                  
                 }

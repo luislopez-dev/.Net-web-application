@@ -9,5 +9,6 @@ public class Invoice
     public float Discount { get; set; }
     public float Total { get; set; }
     public string PaymentMethod { get; set; }
-    public List<InvoiceProduct> Orders { get; set; } = new List<InvoiceProduct>();
+    
+    public List<InvoiceProduct> InvoiceProducts { get; set; } = new List<InvoiceProduct>();
 }

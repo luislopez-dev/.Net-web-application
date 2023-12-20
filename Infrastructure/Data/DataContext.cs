@@ -18,12 +18,12 @@ public class DataContext: DbContext
 
         modelBuilder.Entity<InvoiceProduct>()
             .HasOne(o => o.Invoice)
-            .WithMany(i => i.Orders)
+            .WithMany(i => i.InvoiceProducts)
             .HasForeignKey(o => o.InvoiceId);
 
         modelBuilder.Entity<InvoiceProduct>()
             .HasOne(o => o.Product)
-            .WithMany(p => p.Orders)
+            .WithMany(p => p.InvoiceProducts)
             .HasForeignKey(o => o.ProductId);
     }
 }

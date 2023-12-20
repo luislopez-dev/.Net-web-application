@@ -12,7 +12,7 @@ internal class InvoiceProductRepository : IInvoiceProductRepository
     {
         _context = context;
     }
-    public void CreateRecord(int invoiceId, int[] selectedProducts)
+    public async Task CreateRecord(int invoiceId, int[] selectedProducts)
     {
         foreach (var productId in selectedProducts)
         {
@@ -21,7 +21,7 @@ internal class InvoiceProductRepository : IInvoiceProductRepository
                 InvoiceId = invoiceId,
                 ProductId = productId
             };
-            _context.InvoiceProducts.Add(record);
+            await _context.InvoiceProducts.AddAsync(record);
         }
     }
 }

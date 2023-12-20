@@ -8,25 +8,25 @@ namespace Presentation.Controllers;
 public class InvoicesController : BaseController
 {
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IInvoiceService _invoiceService;
+    private readonly IProductService _productService;
 
-    public InvoicesController(IUnitOfWork unitOfWork)
+    public InvoicesController(IUnitOfWork unitOfWork, IInvoiceService invoiceService, IProductService productService)
     {
         _unitOfWork = unitOfWork;
+        _invoiceService = invoiceService;
+        _productService = productService;
     }
-
     public async Task<IActionResult> Index()
     {
-        var invoices = await _unitOfWork
-            .InvoiceRepository
-            .GetInvoicesPaginatedAsync();
+        var invoices = await _invoiceService
+        .GetInvoicesPaginatedAsync();
         
         return View(invoices);
     }
-    
     public async Task<IActionResult> Create()
     {
-        ViewBag.products = await _unitOfWork
-            .ProductRepository
+        ViewBag.products = await _productService
             .GetProductsPaginatedAsync();
         
         return View();
@@ -41,6 +41,8 @@ public class InvoicesController : BaseController
             TempData["message"] = "Campos invalidos!";
             return View(nameof(Index));
         }
+        
+        await _invoiceService.AddInvoice(invoice, selectedProducts);
         
         if(await _unitOfWork.CompleteAsync()){
             TempData["message"] = "Factura creada exitosamente!";

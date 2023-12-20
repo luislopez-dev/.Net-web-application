@@ -5,37 +5,40 @@
     Layout = "_Layout";
 }
 
-<div>
-    <form asp-action="create">
-        <div class="mb-3">
-            <label asp-for="ClientName" class="form-label">Nombre del cliente</label>
-            <input type="text" asp-for="ClientName" class="form-control" aria-describedby="name">
-        </div>
-        <div class="mb-3">
-            <label asp-for="ClientAddress" class="form-label">Dirección de envio</label>
-            <input type="text" asp-for="ClientAddress" class="form-control" >
-        </div>
-        <div class="mb-3">
-            <label asp-for="ClientNit" class="form-label">NIT del cliente</label>
-            <input type="text" asp-for="ClientNit" class="form-control">
-        </div>
-        <div class="mb-3">
-            <label asp-for="PaymentMethod" class="form-label">Seleccione el método de pago</label>
-            <select asp-for="PaymentMethod" class="form-select">
-              <option value="debit_card">Tarjeta de débito</option>
-              <option value="credit_card">Tarjeta de crédito</option>
-              <option value="cash">Efectivo</option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Seleccione uno o más productos</label>
-            <select name="selectedProducts[]" class="form-select" size="5" multiple aria-label="Multiple select example">
-                @foreach (var product in ViewBag.products)
-                {
-                    <option value="@product.Id">@product.Name</option>
-                }
-            </select>
-        </div>
-        <button type="submit" class="btn btn-primary">Enviar</button>
-    </form>
-</div>
+@if (ViewBag.products != null && ViewBag.products.Count > 0)
+{
+    <div>
+        <form asp-action="create">
+            <div class="mb-3">
+                <label asp-for="ClientName" class="form-label">Nombre del cliente</label>
+                <input type="text" asp-for="ClientName" class="form-control" aria-describedby="name">
+            </div>
+            <div class="mb-3">
+                <label asp-for="ClientAddress" class="form-label">Dirección de envio</label>
+                <input type="text" asp-for="ClientAddress" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label asp-for="ClientNit" class="form-label">NIT del cliente</label>
+                <input type="text" asp-for="ClientNit" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label asp-for="PaymentMethod" class="form-label">Seleccione el método de pago</label>
+                <select asp-for="PaymentMethod" class="form-select">
+                    <option value="debit_card">Tarjeta de débito</option>
+                    <option value="credit_card">Tarjeta de crédito</option>
+                    <option value="cash">Efectivo</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Seleccione uno o más productos</label>
+                <select name="selectedProducts[]" class="form-select" size="5" multiple aria-label="Multiple select example">
+                    @foreach (var product in ViewBag.products)
+                    {
+                        <option value="@product.Id">@product.Name</option>
+                    }
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
+}
