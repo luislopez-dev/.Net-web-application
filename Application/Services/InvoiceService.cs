@@ -13,18 +13,20 @@ public class InvoiceService: IInvoiceService
         _unitOfWork = unitOfWork;
     }
 
-    public void AddInvoice(Invoice invoice, int[] selectedProducts)
+    public async Task AddInvoice(Invoice invoice, int[] selectedProducts)
     {
         invoice.Total = 10;
         invoice.Discount = 2;
         
-        _unitOfWork
+        await _unitOfWork
             .InvoiceRepository
             .AddInvoice(invoice);
         
-        _unitOfWork
-            .InvoiceProductRepository
-            .CreateRecord(invoice.Id, selectedProducts);
+        await _unitOfWork.CompleteAsync();
+        
+        await _unitOfWork
+                .InvoiceProductRepository
+                .CreateRecord(invoice.Id, selectedProducts);
     }
     public async Task<List<Invoice>> GetInvoicesPaginatedAsync()
     {
