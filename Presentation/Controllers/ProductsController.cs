@@ -47,7 +47,7 @@ public class ProductsController : BaseController
         
         var product = await 
             _productService
-            .GetProductByGuid(id);
+            .GetProductByGuidAsync(id);
         
         return View(product);
     }
@@ -76,7 +76,7 @@ public class ProductsController : BaseController
 
         var product = await 
             _productService
-            .GetProductByGuid(id);
+            .GetProductByGuidAsync(id);
 
         if (product == null)
         {
