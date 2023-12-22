@@ -7,7 +7,7 @@
 <nav class="navbar bg-body-tertiary">
     <div class="container-fluid">
         <form asp-action="Search" asp-controller="Products" class="d-flex">
-            <input name="productName" class="form-control me-2" placeholder="Buscar" label="Search" />
+            <input name="productName" maxlength="60" minlength="5" class="form-control me-2" placeholder="Buscar" label="Search" />
             <button class="btn btn-outline-primary" type="submit">Buscar</button>
         </form>
     </div>
