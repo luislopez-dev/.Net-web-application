@@ -37,6 +37,14 @@ internal class ProductRepository: IProductRepository
             .Products
             .FirstOrDefaultAsync(m => m.Id == id);
     }
+
+    public async Task<Product> GetProductByGuid(Guid guid)
+    {
+        return await _context
+            .Products
+            .FirstOrDefaultAsync(m => m.Guid == guid);
+    }
+
     public async Task<List<Product>> GetProductsByNamePaginated(string name)
     {
         return await _context
