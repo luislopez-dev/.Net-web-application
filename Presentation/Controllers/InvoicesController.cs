@@ -42,7 +42,7 @@ public class InvoicesController : BaseController
             return View(nameof(Index));
         }
         
-        await _invoiceService.AddInvoice(invoice, selectedProducts);
+        await _invoiceService.AddInvoiceAsync(invoice, selectedProducts);
         
         if(await _unitOfWork.CompleteAsync()){
             TempData["message"] = "Factura creada exitosamente!";
