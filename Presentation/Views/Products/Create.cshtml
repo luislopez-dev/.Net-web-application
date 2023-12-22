@@ -11,19 +11,19 @@
     <form method="POST" action="">
         <div class="mb-3">
             <label for="InputName" class="form-label">Nombre</label>
-            <input required type="text" name="name" class="form-control" id="InputName">
+            <input required maxlength="60" minlength="5" type="text" name="name" class="form-control" id="InputName">
         </div>
         <div class="mb-3">
             <label for="InputPrice" class="form-label">Precio (Q)</label>
-            <input required type="number" name="price" step="0.01" class="form-control" id="InputPrice">
+            <input required min="0.10" max="100000" type="number" name="price" step="0.01" class="form-control" id="InputPrice">
         </div>
         <div class="mb-3">
             <label for="InputStock" class="form-label">Stock</label>
-            <input required type="number" name="stock" class="form-control" id="InputStock">
+            <input required min="1" max="1000000" type="number" name="stock" class="form-control" id="InputStock">
         </div>
         <div class="mb-3">
             <label for="InputDescription" class="form-label">Descripción</label>
-            <textarea required class="form-control" name="description" id="InputDescription" rows="3"></textarea>
+            <textarea maxlength="900" minlength="5" required class="form-control" name="description" id="InputDescription" rows="3"></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Enviar</button>
     </form>
