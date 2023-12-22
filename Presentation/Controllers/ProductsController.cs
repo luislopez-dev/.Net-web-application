@@ -110,7 +110,7 @@ public class ProductsController : BaseController
     {
         var products = await
             _productService
-            .GetProductsByNamePaginated(productName);
+            .GetProductsByNamePaginatedAsync(productName);
         
         return View("Index", products);
     }
