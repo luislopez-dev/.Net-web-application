@@ -9,5 +9,6 @@ public interface IProductRepository
     public void UpdateProduct(Product product);
     public Task<List<Product>> GetProductsPaginatedAsync();
     public Task<Product> GetProductByIdAsync(int id);
+    public Task<Product> GetProductByGuid(Guid guid);
     public Task<List<Product>> GetProductsByNamePaginated(string name);
 }
