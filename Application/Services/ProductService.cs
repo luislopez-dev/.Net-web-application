@@ -17,11 +17,11 @@ public class ProductService: IProductService
             .ProductRepository
             .AddProduct(product);
     }
-    public void DeleteProduct(Product product)
+    public async Task DeleteProductByGuidAsync(Guid guid)
     {
-        _unitOfWork
+        await _unitOfWork
             .ProductRepository
-            .DeleteProduct(product);
+            .DeleteProductByGuidAsync(guid);
     }
     public void UpdateProduct(Product product)
     {
