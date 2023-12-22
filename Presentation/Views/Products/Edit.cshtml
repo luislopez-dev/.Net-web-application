@@ -14,7 +14,7 @@
         </div>
         <div class="mb-3">
             <label asp-for="Price" for="InputPrice" class="form-label">Precio (Q)</label>
-            <input asp-for="Price" name="price" value="@Model.Price" min="0.10" max="100000" type="number" class="form-control" id="InputPrice">
+            <input asp-for="Price" name="price" value="@Model.Price" min="1" max="100000" type="number" class="form-control" id="InputPrice">
         </div>
         <div class="mb-3">
             <label asp-for="Stock" for="InputStock" class="form-label">Stock</label>
