@@ -11,11 +11,11 @@ public class ProductService: IProductService
     {
         _unitOfWork = unitOfWork;
     }
-    public void AddProduct(Product product)
+    public async Task AddProductAsync(Product product)
     {
-        _unitOfWork
+        await _unitOfWork
             .ProductRepository
-            .AddProduct(product);
+            .AddProductAsync(product);
     }
     public async Task DeleteProductByGuidAsync(Guid guid)
     {
