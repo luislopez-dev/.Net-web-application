@@ -52,7 +52,6 @@ public class ProductsController : BaseController
         return View(product);
     }
 
-  
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(Product product)
@@ -68,7 +67,7 @@ public class ProductsController : BaseController
         return RedirectToAction(nameof(Index));
     }
 
-    public async Task<IActionResult> Edit(int id)
+    public async Task<IActionResult> Edit(Guid id)
     {
         if (id == null)
         {
@@ -77,7 +76,7 @@ public class ProductsController : BaseController
 
         var product = await 
             _productService
-            .GetProductByIdAsync(id);
+            .GetProductByGuid(id);
 
         if (product == null)
         {
