@@ -10,5 +10,5 @@ public interface IProductService
     public Task<List<Product>> GetProductsPaginatedAsync();
     public Task<Product> GetProductByIdAsync(int id);
     public Task<List<Product>> GetProductsByNamePaginated(string name);
-    public Task<Product> GetProductByGuid(Guid guid);
+    public Task<Product> GetProductByGuidAsync(Guid guid);
 }
