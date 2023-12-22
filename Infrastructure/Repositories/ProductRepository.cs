@@ -13,7 +13,7 @@ internal class ProductRepository: IProductRepository
     {
         _context = context;
     }
-    public async Task AddProduct(Product product)
+    public async Task AddProductAsync(Product product)
     {
         await _context.AddAsync(product);
     }
