@@ -4,7 +4,7 @@ namespace Business.Interfaces;
 
 public interface IProductRepository
 {
-    public Task AddProduct(Product product);
+    public Task AddProductAsync(Product product);
     public Task DeleteProductByGuidAsync(Guid guid);
     public void UpdateProduct(Product product);
     public Task<List<Product>> GetProductsPaginatedAsync();
