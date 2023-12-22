@@ -44,7 +44,7 @@ internal class ProductRepository: IProductRepository
             .FirstOrDefaultAsync(m => m.Id == id);
     }
 
-    public async Task<Product> GetProductByGuid(Guid guid)
+    public async Task<Product> GetProductByGuidAsync(Guid guid)
     {
         return await _context
             .Products
