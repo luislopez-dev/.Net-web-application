@@ -34,7 +34,7 @@
                 <select required name="selectedProducts[]" class="form-select" size="5" multiple aria-label="Multiple select example">
                     @foreach (var product in ViewBag.products)
                     {
-                        <option value="@product.Guid">@product.Name</option>
+                        <option value="@product.Id">@product.Name</option>
                     }
                 </select>
             </div>
