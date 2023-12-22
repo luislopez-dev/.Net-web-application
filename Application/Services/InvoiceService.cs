@@ -26,7 +26,7 @@ public class InvoiceService: IInvoiceService
         
         await _unitOfWork
                 .InvoiceProductRepository
-                .CreateRecord(invoice.Id, selectedProducts);
+                .CreateRecordAsync(invoice.Id, selectedProducts);
     }
     public async Task<List<Invoice>> GetInvoicesPaginatedAsync()
     {
