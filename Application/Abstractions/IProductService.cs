@@ -9,6 +9,6 @@ public interface IProductService
     public void UpdateProduct(Product product);
     public Task<List<Product>> GetProductsPaginatedAsync();
     public Task<Product> GetProductByIdAsync(int id);
-    public Task<List<Product>> GetProductsByNamePaginated(string name);
+    public Task<List<Product>> GetProductsByNamePaginatedAsync(string name);
     public Task<Product> GetProductByGuidAsync(Guid guid);
 }
