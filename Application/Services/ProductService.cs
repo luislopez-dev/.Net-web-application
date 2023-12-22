@@ -41,11 +41,11 @@ public class ProductService: IProductService
             .ProductRepository
             .GetProductByIdAsync(id);
     }
-    public async Task<Product> GetProductByGuid(Guid guid)
+    public async Task<Product> GetProductByGuidAsync(Guid guid)
     {
         return await _unitOfWork
             .ProductRepository
-            .GetProductByGuid(guid);
+            .GetProductByGuidAsync(guid);
     }
     public async Task<List<Product>> GetProductsByNamePaginated(string name)
     {
