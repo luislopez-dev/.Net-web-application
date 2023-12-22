@@ -17,8 +17,14 @@ internal class ProductRepository: IProductRepository
     {
         await _context.AddAsync(product);
     }
-    public void DeleteProduct(Product product)
+    public async Task DeleteProductByGuidAsync(Guid guid)
     {
+        /* In case optimization is needed, use this:
+         var sql = $"DELETE FROM Products WHERE Guid = {guid}";
+         await _context.Database.ExecuteSqlRawAsync(sql);
+        */
+        var product = await _context.Products
+            .FirstOrDefaultAsync(m => m.Guid == guid);
         _context.Remove(product);
     }
     public void UpdateProduct(Product product)

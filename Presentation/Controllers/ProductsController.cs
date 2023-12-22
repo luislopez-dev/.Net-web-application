@@ -26,10 +26,10 @@ public class ProductsController : BaseController
     
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> DeleteConfirmed(Product product)
+    public async Task<IActionResult> DeleteConfirmed([Bind("Guid")]Product product)
     {
-        _productService
-        .DeleteProduct(product);
+        await _productService
+        .DeleteProductByGuidAsync(product.Guid);
 
         if (await _unitOfWork.CompleteAsync())
         {
