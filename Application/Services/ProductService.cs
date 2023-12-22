@@ -47,7 +47,7 @@ public class ProductService: IProductService
             .ProductRepository
             .GetProductByGuidAsync(guid);
     }
-    public async Task<List<Product>> GetProductsByNamePaginated(string name)
+    public async Task<List<Product>> GetProductsByNamePaginatedAsync(string name)
     {
         return await _unitOfWork
             .ProductRepository
