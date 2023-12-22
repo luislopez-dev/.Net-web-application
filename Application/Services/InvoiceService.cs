@@ -13,7 +13,7 @@ public class InvoiceService: IInvoiceService
         _unitOfWork = unitOfWork;
     }
 
-    public async Task AddInvoice(Invoice invoice, int[] selectedProducts)
+    public async Task AddInvoiceAsync(Invoice invoice, int[] selectedProducts)
     {
         invoice.Total = 10;
         invoice.Discount = 2;
