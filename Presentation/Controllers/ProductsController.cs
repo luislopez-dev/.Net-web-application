@@ -41,11 +41,13 @@ public class ProductsController : BaseController
         return RedirectToAction(nameof(Index));
     }
 
-    public async Task<IActionResult> Details(int id)
+    public async Task<IActionResult> Details(Guid id)
     {
+        Console.WriteLine(id);
+        
         var product = await 
             _productService
-            .GetProductByIdAsync(id);
+            .GetProductByGuid(id);
         
         return View(product);
     }
