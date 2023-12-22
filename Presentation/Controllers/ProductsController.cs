@@ -91,8 +91,8 @@ public class ProductsController : BaseController
     {
         if (!ModelState.IsValid) return View(product);
             
-            _productService
-            .AddProduct(product);
+            await _productService
+            .AddProductAsync(product);
 
         if(await _unitOfWork.CompleteAsync())
         {
