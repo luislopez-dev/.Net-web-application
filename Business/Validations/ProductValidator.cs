@@ -4,12 +4,13 @@ using FluentValidation;
 namespace Business.Validations;
 
 public class ProductValidator: AbstractValidator<Product> {
-
+    
     public ProductValidator()
     {
         // Validations for Name attribute
         RuleFor(product => product.Name)
             .NotNull()
+            .length(3, 60)
             .WithName("¡El nombre del producto no debe estar vacio!");
         
         // Validations for Price attribute
