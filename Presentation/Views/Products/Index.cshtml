@@ -58,11 +58,12 @@
                     </a>
                 </td>
                 <td>
-                    <button type="submit" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ModalDelete-@product.Id">
+                    <button type="submit" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ModalDelete-@product.Guid">
                         <i class="bi bi-trash"></i>
                     </button>
+                    
                     <!-- Modal Delete -->
-                    <div class="modal fade" id="ModalDelete-@product.Id" tabindex="-1" aria-labelledby="Modal-Delete" aria-hidden="true">
+                    <div class="modal fade" id="ModalDelete-@product.Guid" tabindex="-1" aria-labelledby="Modal-Delete" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -75,7 +76,7 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                                     <form asp-action="Delete">
-                                        <input type="hidden" asp-for="@product.Id" />
+                                        <input type="hidden" asp-for="@product.Guid" />
                                         <button type="submit" class="btn btn-danger">Eliminar</button>
                                     </form>
                                 </div>
