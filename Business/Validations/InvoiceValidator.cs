@@ -37,11 +37,5 @@ public class InvoiceValidator: AbstractValidator<Invoice>
             .WithName("¡El total de la factura no debe estar vacio!")
             .InclusiveBetween(0, 1000000)
             .WithName("¡La cifra del total en la factura debe estar entre 0 y un millón!");
-
-        RuleFor(invoice => invoice.PaymentMethod)
-            .NotNull()
-            .WithName("!El método de pago no debe estar vacio¡")
-            .Must(paymentMethod => new[] {"Debit card", "Credit Card", "Cash"}.Contains(paymentMethod))
-            .WithName("¡El método de pago ingresado no es válido!");
     }
 }
