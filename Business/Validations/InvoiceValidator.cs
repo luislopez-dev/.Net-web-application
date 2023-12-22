@@ -23,12 +23,12 @@ public class InvoiceValidator: AbstractValidator<Invoice>
         RuleFor(invoice => invoice.ClientNit)
             .NotNull()
             .WithName("¡El NIT del cliente no debe estar vacio!")
-            .TotalLength(8)
+            .Length(8)
             .WithName("El NIT debe tener 8 caracteres");
         
         RuleFor(invoice => invoice.Discount)
             .NotNull()
-            .WithName("¡El descuento en la factura no debe estar vacio!");
+            .WithName("¡El descuento en la factura no debe estar vacio!")
             .InclusiveBetween(0, 1000000)
             .WithName("¡La cifra del descuento en la factura debe estar entre 0 y un millón!");
 
