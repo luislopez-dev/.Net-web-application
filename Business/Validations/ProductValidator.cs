@@ -12,7 +12,7 @@ public class ProductValidator: AbstractValidator<Product> {
             .NotNull()
             .WithName("¡El nombre del producto no debe estar vacio!");
             .Length(5, 60)
-            .WithName("El nombre del prudcot debe tener entre 5 a 60 caracteres");
+            .WithName("El nombre del producto debe tener entre 5 a 60 caracteres");
         
         // Validations for Price attribute
         RuleFor(product => product.Price)
