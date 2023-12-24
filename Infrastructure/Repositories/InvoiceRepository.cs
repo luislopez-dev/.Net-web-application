@@ -17,14 +17,17 @@ internal class InvoiceRepository: IInvoiceRepository
         _context = context;
     }
     
-    public async Task AddInvoice(Invoice invoice)
-    {
+    public async Task AddInvoice(Invoice invoice, CancellationToken cancellationToken)
+    {    
+        cancellationToken.ThrowIfCancellationRequested();
+
         await _context.AddAsync(invoice);
     }
     
     public async Task<List<Invoice>> GetInvoicesPaginatedAsync()
     {
-       return await _context.Invoices
+
+        return await _context.Invoices
        .Include(invoice => invoice.InvoiceProducts)
        .ThenInclude(record => record.Product)
        .ToListAsync();

@@ -21,7 +21,7 @@ internal class InvoiceProductRepository : IInvoiceProductRepository
                 InvoiceId = invoiceId,
                 ProductId = productId
             };
-            await _context.InvoiceProducts.AddAsync(record);
+            await _context.InvoiceProducts.AddAsync(record, cancellationToken);
         }
     }
 }
