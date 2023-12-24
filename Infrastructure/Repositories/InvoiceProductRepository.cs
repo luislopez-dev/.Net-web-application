@@ -12,7 +12,7 @@ internal class InvoiceProductRepository : IInvoiceProductRepository
     {
         _context = context;
     }
-    public async Task CreateRecordAsync(int invoiceId, int[] selectedProducts)
+    public async Task CreateRecordAsync(int invoiceId, int[] selectedProducts, CancellationToken cancellationToken)
     {
         foreach (var productId in selectedProducts)
         {
