@@ -26,8 +26,6 @@ public class InvoiceService: IInvoiceService
         try
         {
             // Create Invoice
-            invoice.Total = 11;
-            invoice.Discount = 2;
             await _unitOfWork
                 .InvoiceRepository
                 .AddInvoice(invoice, cancellationToken);

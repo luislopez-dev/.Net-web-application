@@ -10,12 +10,15 @@ public class InvoicesController : BaseController
     private readonly IUnitOfWork _unitOfWork;
     private readonly IInvoiceService _invoiceService;
     private readonly IProductService _productService;
+    private readonly ILogger<InvoicesController> _logger;
 
-    public InvoicesController(IUnitOfWork unitOfWork, IInvoiceService invoiceService, IProductService productService)
+
+    public InvoicesController(IUnitOfWork unitOfWork, IInvoiceService invoiceService, IProductService productService, ILogger<InvoicesController> logger)
     {
         _unitOfWork = unitOfWork;
         _invoiceService = invoiceService;
         _productService = productService;
+        _logger = logger;
     }
     public async Task<IActionResult> Index()
     {
@@ -34,16 +37,24 @@ public class InvoicesController : BaseController
     
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("ClientName", "ClientNit", "PaymentMethod", "ClientAddress")] Invoice invoice, int[] selectedProducts)
+    public async Task<IActionResult> Create([Bind("ClientName", "ClientNit", "PaymentMethod", "ClientAddress")] Invoice invoice, 
+        int[] selectedProducts, 
+        CancellationToken cancellationToken)
     {
         if (!ModelState.IsValid)
         {
             TempData["message"] = "Campos invalidos!";
             return View(nameof(Index));
         }
-        
-        await _invoiceService.AddInvoiceAsync(invoice, selectedProducts);
-        
+        try
+        {
+            await _invoiceService.AddInvoiceAsync(invoice, selectedProducts, cancellationToken);
+        }
+        catch (OperationCanceledException e)
+        {
+            _logger.LogInformation("Operación cancelada");
+        }
+
         if(await _unitOfWork.CompleteAsync()){
             TempData["message"] = "Factura creada exitosamente!";
         }
