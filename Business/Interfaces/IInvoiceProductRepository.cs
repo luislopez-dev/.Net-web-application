@@ -2,5 +2,5 @@
 
 public interface IInvoiceProductRepository
 {
-    public Task CreateRecordAsync(int invoiceId, int[] selectedProducts);
+    public Task CreateRecordAsync(int invoiceId, int[] selectedProducts, CancellationToken cancellationToken);
 }
