@@ -1,5 +1,6 @@
 ﻿using Business.Interfaces;
 using Infrastructure.Data;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Infrastructure.Repositories;
 
@@ -22,5 +23,10 @@ public class UnitOfWork: IUnitOfWork
     public bool HasChanges()
     {
         return _context.ChangeTracker.HasChanges();
+    }
+
+    public IDbContextTransaction BeginTransaction(CancellationToken cancellationToken)
+    {
+        return _context.Database.BeginTransaction();
     }
 }
