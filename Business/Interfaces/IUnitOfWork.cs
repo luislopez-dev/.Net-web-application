@@ -10,7 +10,7 @@ public interface IUnitOfWork
     
     IInvoiceProductRepository InvoiceProductRepository { get; }
     
-    Task<bool> CompleteAsync();
+    Task<bool> CompleteAsync(CancellationToken cancellationToken);
     
     bool HasChanges();
     
