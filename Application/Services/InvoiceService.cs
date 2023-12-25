@@ -45,10 +45,10 @@ public class InvoiceService: IInvoiceService
             await transaction.RollbackAsync(cancellationToken);
         }
     }
-    public async Task<List<Invoice>> GetInvoicesPaginatedAsync()
+    public async Task<List<Invoice>> GetInvoicesPaginatedAsync(CancellationToken cancellationToken)
     {
         return await _unitOfWork
             .InvoiceRepository
-            .GetInvoicesPaginatedAsync();
+            .GetInvoicesPaginatedAsync(cancellationToken);
     }
 }
