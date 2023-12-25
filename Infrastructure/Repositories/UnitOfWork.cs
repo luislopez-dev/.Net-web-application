@@ -16,7 +16,7 @@ public class UnitOfWork: IUnitOfWork
     public IInvoiceRepository InvoiceRepository => new InvoiceRepository(_context);
     public IInvoiceProductRepository InvoiceProductRepository => new InvoiceProductRepository(_context);
 
-    public async Task<bool> CompleteAsync()
+    public async Task<bool> CompleteAsync(CancellationToken cancellationToken)
     {
         return await _context.SaveChangesAsync() > 0;
     }
