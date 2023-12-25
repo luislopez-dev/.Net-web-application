@@ -9,11 +9,13 @@ public class ProductsController : BaseController
 {
     private readonly IProductService _productService;
     private readonly IUnitOfWork _unitOfWork;
+    private readonly ILogger<ProductsController> _logger;
 
-    public ProductsController(IProductService productService, IUnitOfWork unitOfWork)
+    public ProductsController(IProductService productService, IUnitOfWork unitOfWork, ILogger<ProductsController> logger)
     {
         _productService = productService;
         _unitOfWork = unitOfWork;
+        _logger = logger;
     }
 
     public async Task<IActionResult> Index(CancellationToken cancellationToken)
@@ -43,13 +45,22 @@ public class ProductsController : BaseController
 
     public async Task<IActionResult> Details(Guid id, CancellationToken cancellationToken)
     {
-        Console.WriteLine(id);
-        
-        var product = await 
-            _productService
-            .GetProductByGuidAsync(id, cancellationToken);
-        
-        return View(product);
+        try
+        {
+            var product = await 
+                _productService
+                    .GetProductByGuidAsync(id, cancellationToken);
+            if (product == null)
+            {
+                return RedirectToAction("NotFound", "Error");
+            }
+            return View(product);
+        }
+        catch (Exception e)
+        {
+            _logger.LogDebug("*******PRODUCTO NO ENCONTRADO***********");
+            throw;
+        }
     }
 
     [HttpPost]
