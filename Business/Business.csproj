@@ -16,4 +16,8 @@
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.14" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Exceptions\Invoice\" />
+    </ItemGroup>
+
 </Project>
