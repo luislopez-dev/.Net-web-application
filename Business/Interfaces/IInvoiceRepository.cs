@@ -5,5 +5,5 @@ namespace Business.Interfaces;
 public interface IInvoiceRepository
 {
     public Task AddInvoice(Invoice invoice, CancellationToken cancellationToken);
-    public Task<List<Invoice>> GetInvoicesPaginatedAsync();
+    public Task<List<Invoice>> GetInvoicesPaginatedAsync(CancellationToken cancellationToken);
 }
