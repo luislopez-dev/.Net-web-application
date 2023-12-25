@@ -1,6 +1,6 @@
 ﻿namespace Business.Exceptions;
 
-public class ValidationException
+public class ValidationException: Exception
 {
     
 }
