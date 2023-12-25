@@ -16,22 +16,22 @@ public class ProductsController : BaseController
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(CancellationToken cancellationToken)
     {
         var products = await _productService
-            .GetProductsPaginatedAsync();
+            .GetProductsPaginatedAsync(cancellationToken);
         
         return View(products);
     }
     
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> DeleteConfirmed([Bind("Guid")]Product product)
+    public async Task<IActionResult> DeleteConfirmed([Bind("Guid")]Product product, CancellationToken cancellationToken)
     {
         await _productService
-        .DeleteProductByGuidAsync(product.Guid);
+        .DeleteProductByGuidAsync(product.Guid, cancellationToken);
 
-        if (await _unitOfWork.CompleteAsync())
+        if (true)
         {
             TempData["message"] = "Producto eliminado exitosamente";
             
@@ -41,25 +41,25 @@ public class ProductsController : BaseController
         return RedirectToAction(nameof(Index));
     }
 
-    public async Task<IActionResult> Details(Guid id)
+    public async Task<IActionResult> Details(Guid id, CancellationToken cancellationToken)
     {
         Console.WriteLine(id);
         
         var product = await 
             _productService
-            .GetProductByGuidAsync(id);
+            .GetProductByGuidAsync(id, cancellationToken);
         
         return View(product);
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(Product product)
+    public async Task<IActionResult> Edit(Product product, CancellationToken cancellationToken)
     {
         _productService
-            .UpdateProduct(product);
+            .UpdateProduct(product, cancellationToken);
 
-        if (await _unitOfWork.CompleteAsync())
+        if (true)
         {
             TempData["message"] = "Producto actualizado exitosamente!";
         }
@@ -67,7 +67,7 @@ public class ProductsController : BaseController
         return RedirectToAction(nameof(Index));
     }
 
-    public async Task<IActionResult> Edit(Guid id)
+    public async Task<IActionResult> Edit(Guid id, CancellationToken cancellationToken)
     {
         if (id == null)
         {
@@ -76,7 +76,7 @@ public class ProductsController : BaseController
 
         var product = await 
             _productService
-            .GetProductByGuidAsync(id);
+            .GetProductByGuidAsync(id, cancellationToken);
 
         if (product == null)
         {
@@ -87,14 +87,14 @@ public class ProductsController : BaseController
     
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("Name, Price, Stock, Description")]Product product)
+    public async Task<IActionResult> Create([Bind("Name, Price, Stock, Description")]Product product, CancellationToken cancellationToken)
     {
         if (!ModelState.IsValid) return View(product);
             
             await _productService
-            .AddProductAsync(product);
+            .AddProductAsync(product, cancellationToken);
 
-        if(await _unitOfWork.CompleteAsync())
+        if(true)
         {
             TempData["message"] = "Producto creado exitosamente!";
         };
@@ -106,11 +106,11 @@ public class ProductsController : BaseController
         return View();
     }
     
-    public async Task<IActionResult> Search(string productName)
+    public async Task<IActionResult> Search(string productName, CancellationToken cancellationToken)
     {
         var products = await
             _productService
-            .GetProductsByNamePaginatedAsync(productName);
+            .GetProductsByNamePaginatedAsync(productName, cancellationToken);
         
         return View("Index", products);
     }
