@@ -21,15 +21,16 @@ internal class InvoiceRepository: IInvoiceRepository
     {    
         cancellationToken.ThrowIfCancellationRequested();
 
-        await _context.AddAsync(invoice);
+        await _context.AddAsync(invoice, cancellationToken);
     }
     
-    public async Task<List<Invoice>> GetInvoicesPaginatedAsync()
+    public async Task<List<Invoice>> GetInvoicesPaginatedAsync(CancellationToken cancellationToken)
     {
-
+        cancellationToken.ThrowIfCancellationRequested();
+        
         return await _context.Invoices
-       .Include(invoice => invoice.InvoiceProducts)
-       .ThenInclude(record => record.Product)
-       .ToListAsync();
+            .Include(invoice => invoice.InvoiceProducts)
+            .ThenInclude(record => record.Product)
+            .ToListAsync(cancellationToken);
     }
 }
