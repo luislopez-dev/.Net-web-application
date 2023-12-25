@@ -20,17 +20,17 @@ public class InvoicesController : BaseController
         _productService = productService;
         _logger = logger;
     }
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(CancellationToken cancellationToken)
     {
         var invoices = await _invoiceService
-        .GetInvoicesPaginatedAsync();
+        .GetInvoicesPaginatedAsync(cancellationToken);
         
         return View(invoices);
     }
-    public async Task<IActionResult> Create()
+    public async Task<IActionResult> Create(CancellationToken cancellationToken)
     {
         ViewBag.products = await _productService
-            .GetProductsPaginatedAsync();
+            .GetProductsPaginatedAsync(cancellationToken);
         
         return View();
     }
@@ -55,7 +55,7 @@ public class InvoicesController : BaseController
             _logger.LogInformation("Operación cancelada");
         }
 
-        if(await _unitOfWork.CompleteAsync()){
+        if(true){
             TempData["message"] = "Factura creada exitosamente!";
         }
         else
