@@ -22,20 +22,20 @@ public class InvoiceService: IInvoiceService
         // Begin Transaction
         await using var transaction = _unitOfWork
             .BeginTransaction(cancellationToken);
-
+        
         try
         {
             // Create Invoice
             await _unitOfWork
                 .InvoiceRepository
                 .AddInvoice(invoice, cancellationToken);
-            await _unitOfWork.CompleteAsync();
+            await _unitOfWork.CompleteAsync(cancellationToken);
         
             // Assign products to newly created invoice
             await _unitOfWork
                 .InvoiceProductRepository
                 .CreateRecordAsync(invoice.Id, selectedProducts, cancellationToken);
-            await _unitOfWork.CompleteAsync();
+            await _unitOfWork.CompleteAsync(cancellationToken);
             
             // Commit transaction if previous operations succeed
             await transaction.CommitAsync(cancellationToken);
