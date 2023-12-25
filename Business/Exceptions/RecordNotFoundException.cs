@@ -1,6 +1,6 @@
 ﻿namespace Business.Exceptions;
 
-public class NotFoundException: Exception
+public class RecordNotFoundException: Exception
 {
     
 }
