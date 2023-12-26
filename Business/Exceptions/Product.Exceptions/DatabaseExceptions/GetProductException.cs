@@ -1,6 +1,6 @@
 ﻿namespace Business.Exceptions.Product.Exceptions.DatabaseExceptions;
 
-public class ProductsNotFoundException: RecordsNotFoundException
+public class ProductException: GetRecordException
 {
     
 }
