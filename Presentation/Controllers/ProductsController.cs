@@ -22,9 +22,9 @@ public class ProductsController : BaseController
 
     public async Task<IActionResult> Index(CancellationToken cancellationToken)
     {
+       
         var products = await _productService
-            .GetProductsPaginatedAsync(cancellationToken);
-        
+                .GetProductsPaginatedAsync(cancellationToken);
         return View(products);
     }
     
@@ -44,14 +44,21 @@ public class ProductsController : BaseController
     
     public async Task<IActionResult> Details(Guid id, CancellationToken cancellationToken)
     {
-        var product = await 
-            _productService
-                .GetProductByGuidAsync(id, cancellationToken);
-        if (product == null)
+        try
+        {
+            var product = await 
+                _productService
+                    .GetProductByGuidAsync(id, cancellationToken);
+            if (product == null)
+            {
+                return RedirectToAction("NotFound", "Error");
+            }
+            return View(product);
+        }
+        catch (ProductNotFoundException)
         {
             return RedirectToAction("NotFound", "Error");
         }
-        return View(product);
     }
     
     public async Task<IActionResult> Edit(Guid id, CancellationToken cancellationToken)
@@ -86,19 +93,19 @@ public class ProductsController : BaseController
 
             if (true)
             {
-                TempData["message"] = "Producto eliminado exitosamente";
+                TempData["message"] = "¡Producto eliminado exitosamente!";
             }
         }
-        catch (Exception e)
+        catch (DeleteProductException e)
         {
-            TempData["message"] = "No se pudo eliminar el producto, intentelo más tarde";
+            TempData["message"] = "¡No se pudo eliminar el producto, intentelo más tarde!";
             RedirectToAction(nameof(Index));
         }
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Edit(Product product, CancellationToken cancellationToken)
+    public void Edit(Product product, CancellationToken cancellationToken)
     {
         try
         {
@@ -107,26 +114,32 @@ public class ProductsController : BaseController
             
             TempData["message"] = "!Producto actualizado exitosamente!";
         }
-        catch (Exception e)
+        catch (UpdateProductException e)
         {
-            TempData["message"] = "!Error al actualizar el producto, inténtelo más tarde!";
+            TempData["message"] = "!No es posible actualizar el producto en este momento!";
         }
-        return RedirectToAction(nameof(Details), new {product.Guid, cancellationToken});
+        RedirectToAction(nameof(Details), new {product.Guid, cancellationToken});
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("Name, Price, Stock, Description")]Product product, CancellationToken cancellationToken)
+    public async Task Create([Bind("Name, Price, Stock, Description")]Product product, CancellationToken cancellationToken)
     {
-        if (!ModelState.IsValid) return View(product);
+        try
+        {
+            if (!ModelState.IsValid) View(product);
             
             await _productService
-            .AddProductAsync(product, cancellationToken);
+                .AddProductAsync(product, cancellationToken);
+            
+            TempData["message"] = "¡Producto creado exitosamente!";
 
-        if(true)
+            RedirectToAction(nameof(Index));
+        }
+        catch (CreateProductException e)
         {
-            TempData["message"] = "Producto creado exitosamente!";
-        };
-        return RedirectToAction(nameof(Index));
+            TempData["message"] = "¡No es posible crear el producto en este momento!";
+            RedirectToAction(nameof(Create));
+        }
     }
 }
