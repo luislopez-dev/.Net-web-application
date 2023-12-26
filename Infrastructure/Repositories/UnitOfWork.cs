@@ -1,5 +1,7 @@
-﻿using Business.Interfaces;
+﻿using System.Transactions;
+using Business.Interfaces;
 using Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Infrastructure.Repositories;
@@ -18,15 +20,39 @@ public class UnitOfWork: IUnitOfWork
 
     public async Task<bool> CompleteAsync(CancellationToken cancellationToken)
     {
-        return await _context.SaveChangesAsync() > 0;
+        try
+        {
+            return await _context.SaveChangesAsync(cancellationToken) > 0;
+        }
+        catch (DbUpdateException e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
     public bool HasChanges()
     {
-        return _context.ChangeTracker.HasChanges();
+        try
+        {
+            return _context.ChangeTracker.HasChanges();
+        }
+        catch (DbUpdateException e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 
     public IDbContextTransaction BeginTransaction(CancellationToken cancellationToken)
     {
-        return _context.Database.BeginTransaction();
+        try
+        {
+            return _context.Database.BeginTransaction();
+        }
+        catch (TransactionException e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 }
