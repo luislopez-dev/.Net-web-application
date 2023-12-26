@@ -1,6 +1,6 @@
 ﻿namespace Business.Exceptions.Invoice.Exceptions.DatabaseExceptions;
 
-public class FindInvoicesException: FindRecordException
+public class ProductNotFoundException: RecordNotFoundException
 {
     
 }
