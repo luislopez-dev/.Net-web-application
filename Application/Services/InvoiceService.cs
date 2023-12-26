@@ -1,5 +1,6 @@
 ﻿using System.Transactions;
 using Application.Abstractions;
+using Business.Exceptions.Invoice.Exceptions.DatabaseExceptions;
 using Business.Interfaces;
 using Business.Models;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -47,8 +48,18 @@ public class InvoiceService: IInvoiceService
     }
     public async Task<List<Invoice>> GetInvoicesPaginatedAsync(CancellationToken cancellationToken)
     {
-        return await _unitOfWork
-            .InvoiceRepository
-            .GetInvoicesPaginatedAsync(cancellationToken);
+        cancellationToken.ThrowIfCancellationRequested();
+        
+        try
+        {
+            return await _unitOfWork
+                .InvoiceRepository
+                .GetInvoicesPaginatedAsync(cancellationToken);
+        }
+        catch (GetInvoicesException e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 }
