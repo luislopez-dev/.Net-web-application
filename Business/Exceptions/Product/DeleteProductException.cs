@@ -1,6 +1,6 @@
 ﻿namespace Business.Exceptions.Product;
 
-public class ProductDeleteException
+public class DeleteProductException
 {
     
 }
