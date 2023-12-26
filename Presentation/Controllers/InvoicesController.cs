@@ -11,8 +11,7 @@ public class InvoicesController : BaseController
     private readonly IInvoiceService _invoiceService;
     private readonly IProductService _productService;
     private readonly ILogger<InvoicesController> _logger;
-
-
+    
     public InvoicesController(IUnitOfWork unitOfWork, IInvoiceService invoiceService, IProductService productService, ILogger<InvoicesController> logger)
     {
         _unitOfWork = unitOfWork;
