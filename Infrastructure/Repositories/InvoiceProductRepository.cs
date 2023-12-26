@@ -8,7 +8,7 @@ namespace Infrastructure.Repositories;
 internal class InvoiceProductRepository : IInvoiceProductRepository
 {
     private readonly DataContext _context;
-
+    
     public InvoiceProductRepository(DataContext context)
     {
         _context = context;
