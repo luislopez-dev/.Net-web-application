@@ -1,4 +1,6 @@
 ﻿using Application.Abstractions;
+using Business.Exceptions.Invoice.Exceptions.DatabaseExceptions;
+using Business.Exceptions.Product.Exceptions.DatabaseExceptions;
 using Business.Interfaces;
 using Business.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +28,7 @@ public class InvoicesController : BaseController
         
         return View(invoices);
     }
+    
     public async Task<IActionResult> Create(CancellationToken cancellationToken)
     {
         ViewBag.products = await _productService
@@ -36,31 +39,24 @@ public class InvoicesController : BaseController
     
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("ClientName", "ClientNit", "PaymentMethod", "ClientAddress")] Invoice invoice, 
+    public async Task Create([Bind("ClientName", "ClientNit", "PaymentMethod", "ClientAddress")] Invoice invoice, 
         int[] selectedProducts, 
         CancellationToken cancellationToken)
     {
-        if (!ModelState.IsValid)
-        {
-            TempData["message"] = "Campos invalidos!";
-            return View(nameof(Index));
-        }
         try
         {
-            await _invoiceService.AddInvoiceAsync(invoice, selectedProducts, cancellationToken);
-        }
-        catch (OperationCanceledException e)
-        {
-            _logger.LogInformation("Operación cancelada");
-        }
-
-        if(true){
+            if (!ModelState.IsValid) RedirectToAction(nameof(Index));
+            
+            await _invoiceService
+                .AddInvoiceAsync(invoice, selectedProducts, cancellationToken);
+            
             TempData["message"] = "Factura creada exitosamente!";
         }
-        else
+        catch (CreateInvoiceException e)
         {
-            TempData["message"] = "Hubo un error en la creación de la factura!";
+            TempData["message"] = "¡No se pudo crear la factura, intentelo de nuevo más tarde!";
+            
+            RedirectToAction(nameof(Index));
         }
-        return RedirectToAction(nameof(Index));
     }
 }
