@@ -55,7 +55,7 @@ public class ProductsController : BaseController
             }
             return View(product);
         }
-        catch (ProductNotFoundException)
+        catch (GetProductException)
         {
             return RedirectToAction("NotFound", "Error");
         }
@@ -76,7 +76,7 @@ public class ProductsController : BaseController
 
             return View(product);
         }
-        catch (ProductNotFoundException e)
+        catch (GetProductException e)
         {
             return RedirectToAction("NotFound", "Error");
         }
