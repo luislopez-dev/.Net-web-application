@@ -1,4 +1,5 @@
 ﻿using Application.Abstractions;
+using Business.Exceptions.Product.Exceptions.DatabaseExceptions;
 using Business.Interfaces;
 using Business.Models;
 
@@ -15,57 +16,112 @@ public class ProductService: IProductService
     public async Task AddProductAsync(Product product,CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
-        
-        await _unitOfWork
-            .ProductRepository
-            .AddProductAsync(product, cancellationToken);
+
+        try
+        {
+            await _unitOfWork
+                .ProductRepository
+                .AddProductAsync(product, cancellationToken);
+        }
+        catch (CreateProductException e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
     public async Task DeleteProductByGuidAsync(Guid guid, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        await _unitOfWork
-            .ProductRepository
-            .DeleteProductByGuidAsync(guid, cancellationToken);
+        try
+        {
+            await _unitOfWork
+                .ProductRepository
+                .DeleteProductByGuidAsync(guid, cancellationToken);
+        }
+        catch (DeleteProductException e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
     public void UpdateProduct(Product product, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
 
-        _unitOfWork
-            .ProductRepository
-            .UpdateProduct(product, cancellationToken);
+        try
+        {
+            _unitOfWork
+                .ProductRepository
+                .UpdateProduct(product, cancellationToken);
+        }
+        catch (UpdateProductException e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
     public async Task<List<Product>> GetProductsPaginatedAsync(CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
 
-        return await _unitOfWork
-            .ProductRepository
-            .GetProductsPaginatedAsync(cancellationToken);
+        try
+        {
+            return await _unitOfWork
+                .ProductRepository
+                .GetProductsPaginatedAsync(cancellationToken);
+        }
+        catch (GetProductsException e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
     public async Task<Product> GetProductByIdAsync(int id, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
 
-        return await _unitOfWork
-            .ProductRepository
-            .GetProductByIdAsync(id, cancellationToken);
+        try
+        {
+            return await _unitOfWork
+                .ProductRepository
+                .GetProductByIdAsync(id, cancellationToken);
+        }
+        catch (GetProductException e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
     public async Task<Product> GetProductByGuidAsync(Guid guid,CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
 
-        return await _unitOfWork
-            .ProductRepository
-            .GetProductByGuidAsync(guid, cancellationToken);
+        try
+        {
+            return await _unitOfWork
+                .ProductRepository
+                .GetProductByGuidAsync(guid, cancellationToken);
+        }
+        catch (GetProductException e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
     public async Task<List<Product>> GetProductsByNamePaginatedAsync(string name, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
 
-        return await _unitOfWork
-            .ProductRepository
-            .GetProductsByNamePaginated(name, cancellationToken);
+        try
+        {
+            return await _unitOfWork
+                .ProductRepository
+                .GetProductsByNamePaginated(name, cancellationToken);
+        }
+        catch (GetProductsException e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 }
