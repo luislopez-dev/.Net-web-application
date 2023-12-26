@@ -1,6 +1,6 @@
 ﻿namespace Business.Exceptions.Product;
 
-public class DeleteProductException
+public class DeleteProductException: DeleteRecordException
 {
     
 }
