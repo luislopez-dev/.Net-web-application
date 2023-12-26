@@ -1,4 +1,5 @@
 ﻿using Application.Abstractions;
+using Business.Exceptions.Product;
 using Business.Interfaces;
 using Business.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -26,76 +27,92 @@ public class ProductsController : BaseController
         return View(products);
     }
     
-    [HttpPost, ActionName("Delete")]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> DeleteConfirmed([Bind("Guid")]Product product, CancellationToken cancellationToken)
+    public ActionResult Create()
     {
-        await _productService
-        .DeleteProductByGuidAsync(product.Guid, cancellationToken);
-
-        if (true)
-        {
-            TempData["message"] = "Producto eliminado exitosamente";
-            
-            return RedirectToAction(nameof(Index));
-        }
-
-        return RedirectToAction(nameof(Index));
+        return View();
     }
-
+    
+    public async Task<IActionResult> Search(string productName, CancellationToken cancellationToken)
+    {
+        var products = await
+            _productService
+                .GetProductsByNamePaginatedAsync(productName, cancellationToken);
+        
+        return View("Index", products);
+    }
+    
     public async Task<IActionResult> Details(Guid id, CancellationToken cancellationToken)
+    {
+        var product = await 
+            _productService
+                .GetProductByGuidAsync(id, cancellationToken);
+        if (product == null)
+        {
+            return RedirectToAction("NotFound", "Error");
+        }
+        return View(product);
+    }
+    
+    public async Task<IActionResult> Edit(Guid id, CancellationToken cancellationToken)
     {
         try
         {
             var product = await 
                 _productService
                     .GetProductByGuidAsync(id, cancellationToken);
+        
             if (product == null)
             {
                 return RedirectToAction("NotFound", "Error");
             }
+
             return View(product);
+        }
+        catch (ProductNotFoundException e)
+        {
+            return RedirectToAction("NotFound", "Error");
+        }
+    }
+
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public async Task DeleteConfirmed([Bind("Guid")]Product product, CancellationToken cancellationToken)
+    {
+        try
+        {
+            await _productService
+                .DeleteProductByGuidAsync(product.Guid, cancellationToken);
+
+            if (true)
+            {
+                TempData["message"] = "Producto eliminado exitosamente";
+            }
         }
         catch (Exception e)
         {
-            _logger.LogDebug("*******PRODUCTO NO ENCONTRADO***********");
-            throw;
+            TempData["message"] = "No se pudo eliminar el producto, intentelo más tarde";
+            RedirectToAction(nameof(Index));
         }
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(Product product, CancellationToken cancellationToken)
+    public IActionResult Edit(Product product, CancellationToken cancellationToken)
     {
-        _productService
-            .UpdateProduct(product, cancellationToken);
-
-        if (true)
+        try
         {
-            TempData["message"] = "Producto actualizado exitosamente!";
-        }
-
-        return RedirectToAction(nameof(Index));
-    }
-
-    public async Task<IActionResult> Edit(Guid id, CancellationToken cancellationToken)
-    {
-        if (id == null)
-        {
-            return NotFound();
-        }
-
-        var product = await 
             _productService
-            .GetProductByGuidAsync(id, cancellationToken);
-
-        if (product == null)
-        {
-            return NotFound();
+                .UpdateProduct(product, cancellationToken);
+            
+            TempData["message"] = "!Producto actualizado exitosamente!";
         }
-        return View(product);
+        catch (Exception e)
+        {
+            TempData["message"] = "!Error al actualizar el producto, inténtelo más tarde!";
+        }
+        return RedirectToAction(nameof(Details), new {product.Guid, cancellationToken});
     }
-    
+
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create([Bind("Name, Price, Stock, Description")]Product product, CancellationToken cancellationToken)
@@ -110,19 +127,5 @@ public class ProductsController : BaseController
             TempData["message"] = "Producto creado exitosamente!";
         };
         return RedirectToAction(nameof(Index));
-    }
-
-    public ActionResult Create()
-    {
-        return View();
-    }
-    
-    public async Task<IActionResult> Search(string productName, CancellationToken cancellationToken)
-    {
-        var products = await
-            _productService
-            .GetProductsByNamePaginatedAsync(productName, cancellationToken);
-        
-        return View("Index", products);
     }
 }
