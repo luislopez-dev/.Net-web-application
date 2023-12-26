@@ -1,4 +1,5 @@
-﻿using Business.Interfaces;
+﻿using Business.Exceptions.Invoice.Exceptions.DatabaseExceptions;
+using Business.Interfaces;
 using Business.Models;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -20,17 +21,33 @@ internal class InvoiceRepository: IInvoiceRepository
     public async Task AddInvoice(Invoice invoice, CancellationToken cancellationToken)
     {    
         cancellationToken.ThrowIfCancellationRequested();
-
-        await _context.AddAsync(invoice, cancellationToken);
+        
+        try
+        {
+            await _context.AddAsync(invoice, cancellationToken);
+        }
+        catch (CreateInvoiceException e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
     
     public async Task<List<Invoice>> GetInvoicesPaginatedAsync(CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
-        
-        return await _context.Invoices
-            .Include(invoice => invoice.InvoiceProducts)
-            .ThenInclude(record => record.Product)
-            .ToListAsync(cancellationToken);
+
+        try
+        {
+            return await _context.Invoices
+                .Include(invoice => invoice.InvoiceProducts)
+                .ThenInclude(record => record.Product)
+                .ToListAsync(cancellationToken);
+        }
+        catch (GetInvoicesException e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 }
