@@ -1,4 +1,5 @@
-﻿using Business.Interfaces;
+﻿using Business.Exceptions;
+using Business.Interfaces;
 using Business.Models;
 using Infrastructure.Data;
 
@@ -14,14 +15,23 @@ internal class InvoiceProductRepository : IInvoiceProductRepository
     }
     public async Task CreateRecordAsync(int invoiceId, int[] selectedProducts, CancellationToken cancellationToken)
     {
-        foreach (var productId in selectedProducts)
+        try
         {
-            var record = new InvoiceProduct
+            foreach (var productId in selectedProducts)
             {
-                InvoiceId = invoiceId,
-                ProductId = productId
-            };
-            await _context.InvoiceProducts.AddAsync(record, cancellationToken);
+                var record = new InvoiceProduct
+                {
+                    InvoiceId = invoiceId,
+                    ProductId = productId
+                };
+                await _context.InvoiceProducts.AddAsync(record, cancellationToken);
+            }
         }
+        catch (CreateRecordException e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+        
     }
 }
