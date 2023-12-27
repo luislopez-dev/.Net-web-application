@@ -1,6 +1,6 @@
 ﻿using FluentValidation.Results;
 
-namespace Business.Exceptions.Product.Exceptions.ValidationExceptions;
+namespace Business.Exceptions.Product.Exceptions;
 
 public class ProductValidationException: ValidationException
 {
