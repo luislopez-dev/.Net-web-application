@@ -5,6 +5,7 @@
  */
 
 using Presentation.Extensions;
+using Presentation.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,8 @@ builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
