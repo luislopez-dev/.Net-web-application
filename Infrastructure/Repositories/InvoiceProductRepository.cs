@@ -1,4 +1,9 @@
-﻿using Business.Exceptions;
+﻿/*
+ * Author: Luis López
+ * Website: https://github.com/luislopez-dev
+ * Description: Training Project
+ */
+
 using Business.Interfaces;
 using Business.Models;
 using Infrastructure.Data;
