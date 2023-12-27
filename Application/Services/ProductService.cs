@@ -1,10 +1,8 @@
 ﻿using Application.Abstractions;
-using Business.Exceptions.Product.Exceptions.DatabaseExceptions;
-using Business.Exceptions.Product.Exceptions.ValidationExceptions;
+using Business.Exceptions.Product.Exceptions;
 using Business.Interfaces;
 using Business.Models;
 using Business.Validations;
-using FluentValidation;
 using FluentValidation.Results;
 
 namespace Application.Services;
@@ -26,27 +24,24 @@ public class ProductService: IProductService
         
         try
         {
-            ValidationResult result = await _validator
+            // Start validations
+            ValidationResult validation = await _validator
                 .ValidateAsync(product, cancellationToken);
 
-            if (!result.IsValid)
-            {
-                throw new ProductValidationException(result.Errors);
-            }
-        
+            if (!validation.IsValid)
+                throw new ProductValidationException(validation.Errors);
+            
+            // Start DB operations
             await _unitOfWork
                 .ProductRepository
                 .AddProductAsync(product, cancellationToken);
 
             if (!await _unitOfWork.CompleteAsync(cancellationToken))
-            {
                 throw new CreateProductException();
-            }
         }
-        catch (Exception e)
+        catch (CreateProductException e)
         {
-            Console.WriteLine(e);
-            throw;
+            // Handling CreateProductException
         }
     }
     public async Task DeleteProductByGuidAsync(Guid guid, CancellationToken cancellationToken)
@@ -57,27 +52,37 @@ public class ProductService: IProductService
             await _unitOfWork
                 .ProductRepository
                 .DeleteProductByGuidAsync(guid, cancellationToken);
+            
+            if (!await _unitOfWork.CompleteAsync(cancellationToken))
+                throw new DeleteProductException();
         }
         catch (DeleteProductException e)
         {
-            Console.WriteLine(e);
-            throw;
+            // Handle DeleteProductException
         }
     }
-    public void UpdateProduct(Product product, CancellationToken cancellationToken)
+    public async Task UpdateProduct(Product product, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
 
         try
         {
+            ValidationResult validation = await _validator
+                .ValidateAsync(product, cancellationToken);
+
+            if (!validation.IsValid)
+                throw new ProductValidationException(validation.Errors);
+
             _unitOfWork
                 .ProductRepository
                 .UpdateProduct(product, cancellationToken);
+
+            if (!await _unitOfWork.CompleteAsync(cancellationToken))
+                throw new UpdateProductException();
         }
         catch (UpdateProductException e)
         {
-            Console.WriteLine(e);
-            throw;
+            // Handling UpdateProductException
         }
     }
     public async Task<List<Product>> GetProductsPaginatedAsync(CancellationToken cancellationToken)
@@ -92,7 +97,6 @@ public class ProductService: IProductService
         }
         catch (GetProductsException e)
         {
-            Console.WriteLine(e);
             throw;
         }
     }
@@ -108,7 +112,6 @@ public class ProductService: IProductService
         }
         catch (GetProductException e)
         {
-            Console.WriteLine(e);
             throw;
         }
     }
@@ -124,7 +127,6 @@ public class ProductService: IProductService
         }
         catch (GetProductException e)
         {
-            Console.WriteLine(e);
             throw;
         }
     }
@@ -140,7 +142,6 @@ public class ProductService: IProductService
         }
         catch (GetProductsException e)
         {
-            Console.WriteLine(e);
             throw;
         }
     }
