@@ -1,4 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿/*
+ * Author: Luis López
+ * Website: https://github.com/luislopez-dev
+ * Description: Training Project
+ */
+
+using System.ComponentModel.DataAnnotations;
 
 namespace Business.Models;
 
