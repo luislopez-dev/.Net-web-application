@@ -33,6 +33,5 @@ internal class InvoiceProductRepository : IInvoiceProductRepository
             Console.WriteLine(e);
             throw;
         }
-        
     }
 }
