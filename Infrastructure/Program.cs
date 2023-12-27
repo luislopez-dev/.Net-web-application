@@ -1,15 +1,10 @@
-using Infrastructure.Data;
-using Microsoft.EntityFrameworkCore;
+/*
+ * Author: Luis López
+ * Website: https://github.com/luislopez-dev
+ * Description: Training Project
+ */
 
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
-
-/*
-builder.Services.AddDbContext<DataContext>(opt =>
-    {
-        opt.UseSqlServer(builder.Configuration.GetConnectionString("app"));
-    }
-);
-*/
 
 app.Run();
