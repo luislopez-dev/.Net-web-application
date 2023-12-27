@@ -1,4 +1,10 @@
-﻿using Business.Models;
+﻿/*
+ * Author: Luis López
+ * Website: https://github.com/luislopez-dev
+ * Description: Training Project
+ */
+
+using Business.Models;
 
 namespace Business.Interfaces;
 
