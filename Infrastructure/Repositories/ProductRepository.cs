@@ -24,7 +24,6 @@ internal class ProductRepository: IProductRepository
         }
         catch (DbUpdateException e)
         {
-            Console.WriteLine(e);
             throw;
         }
     }
@@ -40,7 +39,6 @@ internal class ProductRepository: IProductRepository
         }
         catch (DbUpdateException e)
         {
-            Console.WriteLine(e);
             throw;
         }
     }
@@ -49,13 +47,12 @@ internal class ProductRepository: IProductRepository
         cancellationToken.ThrowIfCancellationRequested();
 
         try
-        {
+        { 
             _context.Entry(product).State = EntityState.Modified;
         }
         catch (DbUpdateException e)
         {
-            Console.WriteLine(e);
-            throw;
+            // DbUpdateException handling
         }
     }
     public async Task<List<Product>> GetProductsPaginatedAsync(CancellationToken cancellationToken)
@@ -70,7 +67,6 @@ internal class ProductRepository: IProductRepository
         }
         catch (DbException e)
         {
-            Console.WriteLine(e);
             throw;
         }
     }
@@ -84,7 +80,6 @@ internal class ProductRepository: IProductRepository
         }
         catch (DbException e)
         {
-            Console.WriteLine(e);
             throw;
         }
     }
@@ -99,7 +94,6 @@ internal class ProductRepository: IProductRepository
         }
         catch (DbException e)
         {
-            Console.WriteLine(e);
             throw;
         }
     }
@@ -117,7 +111,6 @@ internal class ProductRepository: IProductRepository
         }
         catch (DbException e)
         {
-            Console.WriteLine(e);
             throw;
         }
     }
