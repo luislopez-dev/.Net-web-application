@@ -1,4 +1,9 @@
-using Microsoft.AspNetCore.Mvc;
+/*
+ * Author: Luis López
+ * Website: https://github.com/luislopez-dev
+ * Description: Training Project
+ */
+
 using Presentation.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
