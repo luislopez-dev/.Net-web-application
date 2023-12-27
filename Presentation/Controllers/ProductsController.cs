@@ -1,6 +1,6 @@
 ﻿using Application.Abstractions;
-using Business.Exceptions.Product;
 using Business.Exceptions.Product.Exceptions.DatabaseExceptions;
+using Business.Exceptions.Product.Exceptions.ValidationExceptions;
 using Business.Interfaces;
 using Business.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -20,6 +20,11 @@ public class ProductsController : BaseController
         _logger = logger;
     }
 
+    public ActionResult Create()
+    {
+        return View();
+    }
+    
     public async Task<IActionResult> Index(CancellationToken cancellationToken)
     {
        
@@ -27,12 +32,7 @@ public class ProductsController : BaseController
                 .GetProductsPaginatedAsync(cancellationToken);
         return View(products);
     }
-    
-    public ActionResult Create()
-    {
-        return View();
-    }
-    
+
     public async Task<IActionResult> Search(string productName, CancellationToken cancellationToken)
     {
         var products = await
@@ -123,23 +123,29 @@ public class ProductsController : BaseController
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task Create([Bind("Name, Price, Stock, Description")]Product product, CancellationToken cancellationToken)
+    public async Task<IActionResult> Create([Bind("Name, Price, Stock, Description")]Product product, CancellationToken cancellationToken)
     {
         try
         {
-            if (!ModelState.IsValid) View(product);
-            
             await _productService
                 .AddProductAsync(product, cancellationToken);
-            
-            TempData["message"] = "¡Producto creado exitosamente!";
 
-            RedirectToAction(nameof(Index));
+            TempData["message"] = "¡Producto creado exitosamente!";
+            return RedirectToAction(nameof(Index));
+        }
+        catch (ProductValidationException e)
+        {
+            foreach (var error in e.ValidationFailures)
+            {
+                ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+            }
+
+            return View(product);
         }
         catch (CreateProductException e)
         {
             TempData["message"] = "¡No es posible crear el producto en este momento!";
-            RedirectToAction(nameof(Create));
+            return View(product);
         }
     }
 }
