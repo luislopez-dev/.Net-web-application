@@ -11,15 +11,18 @@
         <form asp-action="create">
             <div class="mb-3">
                 <label asp-for="ClientName" class="form-label">Nombre del cliente</label>
-                <input required type="text" asp-for="ClientName" class="form-control" aria-describedby="name">
+                <input required minlength="5" maxlength="70" type="text" asp-for="ClientName" class="form-control" aria-describedby="name">
+                <span asp-validation-for="ClientName" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label asp-for="ClientAddress" class="form-label">Dirección de envio</label>
-                <input required type="text" asp-for="ClientAddress" class="form-control">
+                <input required minlength="20" maxlength="400" type="text" asp-for="ClientAddress" class="form-control">
+                <span asp-validation-for="ClientAddress" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label asp-for="ClientNit" class="form-label">NIT del cliente</label>
-                <input required type="text" asp-for="ClientNit" class="form-control">
+                <input required type="text" asp-for="ClientNit" class="form-control" pattern=".{9}" title="El NIT debe conformarse por 8 números">
+                <span asp-validation-for="ClientNit" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label asp-for="PaymentMethod" class="form-label">Seleccione el método de pago</label>
@@ -28,6 +31,7 @@
                     <option value="Debit card">Tarjeta de crédito</option>
                     <option value="Cash">Efectivo</option>
                 </select>
+                <span asp-validation-for="PaymentMethod" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label class="form-label">Seleccione uno o más productos</label>
@@ -40,5 +44,11 @@
             </div>
             <button type="submit" class="btn btn-primary">Enviar</button>
         </form>
+    </div>
+}
+else
+{
+    <div class="alert alert-info">
+        ¡Deben haber productos registrados para poder crear facturas!
     </div>
 }
