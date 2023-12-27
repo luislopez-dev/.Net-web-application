@@ -1,12 +1,13 @@
 ﻿@model Business.Models.Invoice
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "Crear Factura";
     Layout = "_Layout";
 }
 
 @if (ViewBag.products != null && ViewBag.products.Count > 0)
 {
+    <h1>Crear factura</h1>
     <div>
         <form asp-action="create">
             <div class="mb-3">
