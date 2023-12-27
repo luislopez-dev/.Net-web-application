@@ -23,7 +23,7 @@ public class InvoiceService: IInvoiceService
         // Begin Transaction
         await using var transaction = _unitOfWork
             .BeginTransaction(cancellationToken);
-        
+
         try
         {
             // Create Invoice
@@ -31,19 +31,23 @@ public class InvoiceService: IInvoiceService
                 .InvoiceRepository
                 .AddInvoice(invoice, cancellationToken);
             await _unitOfWork.CompleteAsync(cancellationToken);
-        
+
             // Assign products to newly created invoice
             await _unitOfWork
                 .InvoiceProductRepository
                 .CreateRecordAsync(invoice.Id, selectedProducts, cancellationToken);
             await _unitOfWork.CompleteAsync(cancellationToken);
-            
+
             // Commit transaction if previous operations succeed
             await transaction.CommitAsync(cancellationToken);
         }
         catch (TransactionException e)
         {
             await transaction.RollbackAsync(cancellationToken);
+        }
+        catch (CreateInvoiceException e)
+        {
+            
         }
     }
     public async Task<List<Invoice>> GetInvoicesPaginatedAsync(CancellationToken cancellationToken)
