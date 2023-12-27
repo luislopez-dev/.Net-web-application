@@ -1,4 +1,4 @@
-﻿using Business.Exceptions.Product.Exceptions.DatabaseExceptions;
+﻿using System.Data.Common;
 using Business.Interfaces;
 using Business.Models;
 using Infrastructure.Data;
@@ -22,7 +22,7 @@ internal class ProductRepository: IProductRepository
         {
             await _context.AddAsync(product, cancellationToken);
         }
-        catch (CreateProductException e)
+        catch (DbUpdateException e)
         {
             Console.WriteLine(e);
             throw;
@@ -38,7 +38,7 @@ internal class ProductRepository: IProductRepository
                 .FirstOrDefaultAsync(m => m.Guid == guid, cancellationToken);
             _context.Remove(product);
         }
-        catch (DeleteProductException e)
+        catch (DbUpdateException e)
         {
             Console.WriteLine(e);
             throw;
@@ -52,7 +52,7 @@ internal class ProductRepository: IProductRepository
         {
             _context.Entry(product).State = EntityState.Modified;
         }
-        catch (UpdateProductException e)
+        catch (DbUpdateException e)
         {
             Console.WriteLine(e);
             throw;
@@ -68,7 +68,7 @@ internal class ProductRepository: IProductRepository
         
             return await products.ToListAsync(cancellationToken);
         }
-        catch (GetProductsException e)
+        catch (DbException e)
         {
             Console.WriteLine(e);
             throw;
@@ -82,7 +82,7 @@ internal class ProductRepository: IProductRepository
                 .Products
                 .FirstOrDefaultAsync(m => m.Id == id, cancellationToken);
         }
-        catch (GetProductException e)
+        catch (DbException e)
         {
             Console.WriteLine(e);
             throw;
@@ -97,7 +97,7 @@ internal class ProductRepository: IProductRepository
                 .Products
                 .FirstOrDefaultAsync(m => m.Guid == guid, cancellationToken);
         }
-        catch (GetProductsException e)
+        catch (DbException e)
         {
             Console.WriteLine(e);
             throw;
@@ -110,11 +110,12 @@ internal class ProductRepository: IProductRepository
         {
             return await _context
                 .Products
-                .Where(p => EF.Functions.Like(p.Name, $"%{name}%"))
+                .Where(p => EF.Functions
+                    .Like(p.Name, $"%{name}%"))
                 .OrderBy(p => p.Id)
                 .ToListAsync(cancellationToken);
         }
-        catch (GetProductsException e)
+        catch (DbException e)
         {
             Console.WriteLine(e);
             throw;
