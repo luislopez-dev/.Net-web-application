@@ -1,6 +1,7 @@
 ﻿using Application.Abstractions;
 using Application.Services;
 using Business.Interfaces;
+using Business.Validations;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,8 @@ public static class ApplicationServiceExtensions
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IProductService, ProductService>();
         services.AddScoped<IInvoiceService, InvoiceService>();
+        services.AddScoped<ProductValidator>();
+        services.AddScoped<InvoiceValidator>();
         
         return services;
     }
