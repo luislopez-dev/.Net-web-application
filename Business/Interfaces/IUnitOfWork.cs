@@ -1,4 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore.Storage;
+﻿/*
+ * Author: Luis López
+ * Website: https://github.com/luislopez-dev
+ * Description: Training Project
+ */
+ 
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Business.Interfaces;
 
