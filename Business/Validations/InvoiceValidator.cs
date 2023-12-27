@@ -1,4 +1,9 @@
-﻿using System.Data;
+﻿/*
+ * Author: Luis López
+ * Website: https://github.com/luislopez-dev
+ * Description: Training Project
+ */
+
 using Business.Models;
 using FluentValidation;
 
