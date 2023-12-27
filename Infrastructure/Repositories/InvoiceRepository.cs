@@ -1,5 +1,4 @@
 ﻿using System.Data.Common;
-using Business.Exceptions.Invoice.Exceptions.DatabaseExceptions;
 using Business.Interfaces;
 using Business.Models;
 using Infrastructure.Data;
