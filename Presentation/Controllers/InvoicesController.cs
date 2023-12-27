@@ -52,23 +52,28 @@ public class InvoicesController : BaseController
             await _invoiceService
                 .AddInvoiceAsync(invoice, selectedProducts, cancellationToken);
 
-            TempData["message"] = "Factura creada exitosamente!";
+            TempData["message"] = "!Factura creada exitosamente!";
             
             return RedirectToAction(nameof(Index));   
         }
         catch (InvoiceValidationException e)
         {
+            Console.WriteLine("Error in validations");
             foreach (var error in e.ValidationFailures)
             {
                 ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
             }
+            
+            ViewBag.products = await _productService
+                .GetProductsPaginatedAsync(cancellationToken);
+            
             return View(invoice);
         }
         catch (CreateInvoiceException e)
         {
             TempData["message"] = "¡No se pudo crear la factura, intentelo de nuevo más tarde!";
-            
-            return RedirectToAction(nameof(Index));
+            Console.WriteLine("Error in CreateInvoice");
+            return View(invoice);
         }
     }
 }

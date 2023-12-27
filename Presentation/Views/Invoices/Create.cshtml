@@ -15,7 +15,7 @@ Description: Training Project
 {
     <h1>Crear factura</h1>
     <div>
-        <form asp-action="create">
+        <form asp-controller="Invoices" asp-action="Create" method="POST">
             <div class="mb-3">
                 <label asp-for="ClientName" class="form-label">Nombre del cliente</label>
                 <input required minlength="5" maxlength="70" type="text" asp-for="ClientName" class="form-control" aria-describedby="name">
@@ -23,12 +23,12 @@ Description: Training Project
             </div>
             <div class="mb-3">
                 <label asp-for="ClientAddress" class="form-label">Dirección de envio</label>
-                <input required minlength="20" maxlength="400" type="text" asp-for="ClientAddress" class="form-control">
+                <input required minlength="10" maxlength="400" type="text" asp-for="ClientAddress" class="form-control">
                 <span asp-validation-for="ClientAddress" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label asp-for="ClientNit" class="form-label">NIT del cliente</label>
-                <input required type="text" asp-for="ClientNit" class="form-control" pattern=".{9}" title="El NIT debe conformarse por 8 números">
+                <input required type="text" asp-for="ClientNit" class="form-control" pattern=".{8}" title="El NIT debe conformarse por 8 números">
                 <span asp-validation-for="ClientNit" class="text-danger"></span>
             </div>
             <div class="mb-3">

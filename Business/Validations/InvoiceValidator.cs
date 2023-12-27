@@ -19,7 +19,7 @@ public class InvoiceValidator: AbstractValidator<Invoice>
         
         RuleFor(invoice => invoice.ClientAddress)
             .NotNull().WithMessage("¡La dirección del cliente no debe estar vacia!")
-            .Length(20, 400).WithMessage("El nombre del cliente debe tener entre 5 a 400 caracteres");
+            .Length(10, 400).WithMessage("La dirección debe tener entre 10 a 400 caracteres");
         
         RuleFor(invoice => invoice.ClientNit)
             .NotNull().WithMessage("¡El NIT del cliente no debe estar vacio!")
