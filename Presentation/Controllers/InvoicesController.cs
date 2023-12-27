@@ -1,4 +1,10 @@
-﻿using Application.Abstractions;
+﻿/*
+ * Author: Luis López
+ * Website: https://github.com/luislopez-dev
+ * Description: Training Project
+ */
+
+using Application.Abstractions;
 using Business.Exceptions.Invoice.Exceptions.ValidationExceptions;
 using Business.Interfaces;
 using Business.Models;
