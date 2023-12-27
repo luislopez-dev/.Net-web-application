@@ -1,4 +1,5 @@
-﻿using Business.Exceptions.Invoice.Exceptions.DatabaseExceptions;
+﻿using System.Data.Common;
+using Business.Exceptions.Invoice.Exceptions.DatabaseExceptions;
 using Business.Interfaces;
 using Business.Models;
 using Infrastructure.Data;
@@ -26,7 +27,7 @@ internal class InvoiceRepository: IInvoiceRepository
         {
             await _context.AddAsync(invoice, cancellationToken);
         }
-        catch (CreateInvoiceException e)
+        catch (DbUpdateException e)
         {
             Console.WriteLine(e);
             throw;
@@ -44,7 +45,7 @@ internal class InvoiceRepository: IInvoiceRepository
                 .ThenInclude(record => record.Product)
                 .ToListAsync(cancellationToken);
         }
-        catch (GetInvoicesException e)
+        catch (DbException e)
         {
             Console.WriteLine(e);
             throw;
