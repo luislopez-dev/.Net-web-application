@@ -1,6 +1,5 @@
 ﻿using Application.Abstractions;
-using Business.Exceptions.Product.Exceptions.DatabaseExceptions;
-using Business.Exceptions.Product.Exceptions.ValidationExceptions;
+using Business.Exceptions.Product.Exceptions;
 using Business.Interfaces;
 using Business.Models;
 using Microsoft.AspNetCore.Mvc;
