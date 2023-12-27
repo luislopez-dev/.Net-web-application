@@ -33,4 +33,5 @@ public class ProductValidator: AbstractValidator<Product> {
             .NotNull().WithName("¡El stock del producto no debe estar vacio!")
             .InclusiveBetween(1, 1000000).WithMessage("El stock del producto debe estar entre una a un millón de unidades");
     }
+    
 }

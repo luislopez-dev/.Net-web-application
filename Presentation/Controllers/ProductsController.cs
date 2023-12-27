@@ -95,35 +95,35 @@ public class ProductsController : BaseController
         {
             await _productService
                 .DeleteProductByGuidAsync(product.Guid, cancellationToken);
-
-            if (true)
-            {
-                TempData["message"] = "¡Producto eliminado exitosamente!";
-            }
+            
+            TempData["message"] = "¡Producto eliminado exitosamente!";
         }
         catch (DeleteProductException e)
         {
-            TempData["message"] = "¡No se pudo eliminar el producto, intentelo más tarde!";
+            TempData["message"] = "¡No se pudo eliminar el producto, inténtelo más tarde!";
+            
             RedirectToAction(nameof(Index));
         }
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public void Edit(Product product, CancellationToken cancellationToken)
+    public IActionResult Edit(Product product, CancellationToken cancellationToken)
     {
         try
         {
             _productService
                 .UpdateProduct(product, cancellationToken);
-            
+
             TempData["message"] = "!Producto actualizado exitosamente!";
+
+            return RedirectToAction(nameof(Details), new {product.Guid});
         }
         catch (UpdateProductException e)
         {
             TempData["message"] = "!No es posible actualizar el producto en este momento!";
         }
-        RedirectToAction(nameof(Details), new {product.Guid, cancellationToken});
+        return RedirectToAction(nameof(Details), new {product.Guid, cancellationToken});
     }
 
     [HttpPost]
@@ -136,7 +136,8 @@ public class ProductsController : BaseController
                 .AddProductAsync(product, cancellationToken);
 
             TempData["message"] = "¡Producto creado exitosamente!";
-            return RedirectToAction(nameof(Index));
+            
+            return RedirectToAction(nameof(Details), new {product.Guid});
         }
         catch (ProductValidationException e)
         {
@@ -150,6 +151,7 @@ public class ProductsController : BaseController
         catch (CreateProductException e)
         {
             TempData["message"] = "¡No es posible crear el producto en este momento!";
+            
             return View(product);
         }
     }

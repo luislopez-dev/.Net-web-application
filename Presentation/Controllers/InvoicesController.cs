@@ -19,12 +19,11 @@ public class InvoicesController : BaseController
     private readonly IProductService _productService;
     private readonly ILogger<InvoicesController> _logger;
     
-    public InvoicesController(IUnitOfWork unitOfWork, IInvoiceService invoiceService, IProductService productService, ILogger<InvoicesController> logger)
+    public InvoicesController(IUnitOfWork unitOfWork, IInvoiceService invoiceService, IProductService productService)
     {
         _unitOfWork = unitOfWork;
         _invoiceService = invoiceService;
         _productService = productService;
-        _logger = logger;
     }
     public async Task<IActionResult> Index(CancellationToken cancellationToken)
     {
@@ -44,24 +43,32 @@ public class InvoicesController : BaseController
     
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task Create([Bind("ClientName", "ClientNit", "PaymentMethod", "ClientAddress")] Invoice invoice, 
+    public async Task<IActionResult> Create([Bind("ClientName", "ClientNit", "PaymentMethod", "ClientAddress")] Invoice invoice, 
         int[] selectedProducts, 
         CancellationToken cancellationToken)
     {
         try
         {
-            if (!ModelState.IsValid) RedirectToAction(nameof(Index));
-            
             await _invoiceService
                 .AddInvoiceAsync(invoice, selectedProducts, cancellationToken);
-            
+
             TempData["message"] = "Factura creada exitosamente!";
+            
+            return RedirectToAction(nameof(Index));   
+        }
+        catch (InvoiceValidationException e)
+        {
+            foreach (var error in e.ValidationFailures)
+            {
+                ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+            }
+            return View(invoice);
         }
         catch (CreateInvoiceException e)
         {
             TempData["message"] = "¡No se pudo crear la factura, intentelo de nuevo más tarde!";
             
-            RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index));
         }
     }
 }
