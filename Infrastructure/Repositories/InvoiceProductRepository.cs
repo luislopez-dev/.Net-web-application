@@ -2,6 +2,7 @@
 using Business.Interfaces;
 using Business.Models;
 using Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 
@@ -27,7 +28,7 @@ internal class InvoiceProductRepository : IInvoiceProductRepository
                 await _context.InvoiceProducts.AddAsync(record, cancellationToken);
             }
         }
-        catch (CreateRecordException e)
+        catch (DbUpdateException e)
         {
             Console.WriteLine(e);
             throw;
