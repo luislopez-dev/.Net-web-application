@@ -1,4 +1,10 @@
-﻿using System.Transactions;
+﻿/*
+ * Author: Luis López
+ * Website: https://github.com/luislopez-dev
+ * Description: Training Project
+ */
+
+using System.Transactions;
 using Application.Abstractions;
 using Business.Exceptions.Invoice.Exceptions.ValidationExceptions;
 using Business.Interfaces;
