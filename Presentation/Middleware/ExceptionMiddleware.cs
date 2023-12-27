@@ -1,4 +1,10 @@
-﻿namespace Presentation.Middleware;
+﻿/*
+ * Author: Luis López
+ * Website: https://github.com/luislopez-dev
+ * Description: Training Project
+ */
+
+namespace Presentation.Middleware;
 
 public class ExceptionMiddleware
 {
