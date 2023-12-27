@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using Presentation.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,7 +8,6 @@ builder.Services.AddApplicationServices(builder.Configuration);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-
 
 var app = builder.Build();
 
